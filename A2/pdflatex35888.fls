@@ -1,0 +1,5 @@
+PWD d:/Desktop/人机交互/A2
+INPUT d:/texlive/2024/texmf.cnf
+INPUT d:/texlive/2024/texmf-dist/web2c/texmf.cnf
+INPUT d:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT d:/Desktop/人机交互/A2/A2.tex
