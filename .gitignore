@@ -1,2 +1,52 @@
+# IDE and Editor
 /.cursorindexingignore
 /.specstory
+.vscode/
+.DS_Store
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.nav
+*.snm
+*.vrb
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+
+# LaTeX output files (uncomment if you don't want to track PDFs)
+# *.pdf
+
+# Temporary files
+*~
+*.swp
+*.swo
+*.tmp
+.latexmkrc
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Microsoft Office temporary files
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+*.tmp
+
+# Backup files
+*.bak
+*~
