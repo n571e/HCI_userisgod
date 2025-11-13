@@ -1,0 +1,100 @@
+% !TEX program = xelatex
+\documentclass[12pt,notitlepage]{ctexart}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+\else
+\usepackage{fontspec}
+\fi
+\usepackage{xcolor}
+\definecolor{teal}{RGB}{0,128,128}
+\definecolor{gray}{RGB}{128,128,128}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\setlist{nosep}
+\usepackage{microtype}
+\usepackage{graphicx}
+
+\title{\textbf{A3：低保真模型}}
+\author{
+  团队：用户说得队 \\[0.5em]
+  成员：张天成、戴于皓、赵轩、李易涵、金杨洋
+}
+\date{2025年 11 月 13日}
+
+\begin{document}
+
+\maketitle
+
+\section{原型一：可查证的决策卡}
+
+纸质原型如图\ref{fig:prototype1}：
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./media/image1.jpeg}
+\caption{原型一：可查证的决策卡}
+\label{fig:prototype1}
+\end{figure}
+
+\textbf{优点：}关键信息分区清晰，AI 辅助减少输入成本，关联原文锚点满足追溯需求。
+
+\textbf{缺点：}编辑页布局偏复杂，移动端操作可能拥挤；不同意见抓取精度依赖 AI，未考虑人工补充入口。
+
+\subsection{迭代过程}
+
+迭代版本在原来的基础上优化的决策卡的编辑逻辑，新增了暂存和更新按钮，帮助用户更好对决策卡进行编辑和操作。
+
+\section{原型二：只看我相关微摘要}
+
+纸质原型如图\ref{fig:prototype2}：
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./media/image2.jpeg}
+\caption{原型二：只看我相关微摘要}
+\label{fig:prototype2}
+\end{figure}
+
+\textbf{优点：}订阅条件贴合用户需求，微摘要形式节省时间，操作路径短。
+
+\textbf{缺点：}未提供摘要视角切换（个人 / 团队 / 家校）功能；推送频率未设置自定义选项，可能造成打扰。缺少个性化和自定义的功能。
+
+\subsection{迭代过程}
+
+迭代版本在原版的基础上增加了自定义功能，使得用户能在原来的基础上更加灵活的接收到自己想要的内容。
+
+增加了切换视角的功能，用户能够从多个视角准确找到自己想要的内容。
+
+优化了 UI 的逻辑，用户能够更加明了的了解内容。
+
+\section{原型三：行动抽取与同步}
+
+纸质原型如图\ref{fig:prototype3}：
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./media/image3.jpeg}
+\caption{原型三：行动抽取与同步}
+\label{fig:prototype3}
+\end{figure}
+
+\textbf{优点：}行动提取流程简单，支持多工具同步，状态回写满足闭环需求。
+
+\textbf{缺点：}依赖长按触发提取，入口不够直观；未展示任务依赖关系，异常提醒机制未体现。
+
+\subsection{迭代过程}
+
+\begin{enumerate}
+\item \textbf{优化提取入口：}在群聊输入框旁新增「+」号按钮，直接包含「提取行动卡」选项，入口更直观。
+
+\item \textbf{补充依赖关系展示：}行动卡编辑页新增「添加依赖任务」选项，支持选择已有的行动卡建立关联，关联后在详情页以「箭头」标注。
+
+\item \textbf{增加异常提醒：}设置「截止前 1 天」「截止前 6 小时」自动提醒，异常状态（如逾期未完成）以红色卡片形式推送至用户，支持点击「处理异常」快速反馈。
+\end{enumerate}
+
+\end{document}
