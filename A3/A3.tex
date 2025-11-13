@@ -32,69 +32,315 @@
 
 \section{原型一：可查证的决策卡}
 
-纸质原型如图\ref{fig:prototype1}：
+\subsection{设计思路 (Make)}
+
+本原型旨在解决群聊中决策信息难以追溯和沉淀的问题。设计包含四个核心界面：
+
+\begin{enumerate}
+\item \textbf{决策卡展示页}：点击展开详情，支持快速预览决策内容
+\item \textbf{决策卡编辑器}：分栏布局，左侧显示AI自动抓取的候选关键词，右侧显示对应原文锚点
+\item \textbf{决策卡详情页}：展示决策的详细信息，包括结论、理由、责任人、截止时间等字段
+\item \textbf{编辑页}：支持直接编辑各字段，每个字段都关联到对应原文，编辑后若与原文不符会标红提示
+\end{enumerate}
+
+生成机制：检测到"决定"等关键词时自动触发/用户手动触发，AI辅助填充关键信息。
+
+\subsection{原型展示 (Show)}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{./media/image1.jpeg}
-\caption{原型一：可查证的决策卡}
+\includegraphics[width=\textwidth]{./media/prototype1.png}
+\caption{原型一：可查证的决策卡(左侧为初版原型,右侧为迭代改进)}
 \label{fig:prototype1}
 \end{figure}
 
-\textbf{优点：}关键信息分区清晰，AI 辅助减少输入成本，关联原文锚点满足追溯需求。
+如图\ref{fig:prototype1}所示，原型包含:
 
-\textbf{缺点：}编辑页布局偏复杂，移动端操作可能拥挤；不同意见抓取精度依赖 AI，未考虑人工补充入口。
+\textbf{左侧 - 初版原型：}
+\begin{itemize}
+\item \textbf{决策卡预览界面}：简洁展示关键信息，支持点击展开详情
+\item \textbf{决策卡编辑器}：双栏设计，左侧显示候选关键词(结论、理由、责任人等)，右侧显示对应原文锚点
+\item \textbf{决策卡详情页}：展示完整的决策信息，包含生成行动项、同步公告、修改记录等功能按钮
+\end{itemize}
 
-\subsection{迭代过程}
+\textbf{右侧 - 迭代改进：}
+\begin{itemize}
+\item \textbf{编辑页优化}：展示详细的字段编辑界面，包括结论、理由、责任人、截止时间等
+\item \textbf{字段关联}：每个字段都通过箭头关联到对应原文，可直接点击查看
+\item \textbf{新增功能按钮}：底部增加"暂存"和"更新"两个按钮
+\item \textbf{编辑提示}：可直接在字段中编辑，编辑后若与原文不符会标红或突出显示
+\end{itemize}
 
-迭代版本在原来的基础上优化的决策卡的编辑逻辑，新增了暂存和更新按钮，帮助用户更好对决策卡进行编辑和操作。
+\subsection{评估与反思 (Learn)}
+
+\textbf{优点：}
+\begin{itemize}
+\item 关键信息分区清晰，便于快速定位
+\item AI 辅助减少手工输入成本
+\item 原文锚点关联满足追溯需求
+\item 编辑后若与原文不符会标红，防止信息失真
+\end{itemize}
+
+\textbf{缺点：}
+\begin{itemize}
+\item 编辑页布局偏复杂，移动端操作可能拥挤
+\item 不同意见抓取精度依赖 AI，未充分考虑人工补充入口
+\item 初版缺少暂存功能，用户误操作风险高
+\end{itemize}
+
+\subsection{迭代改进}
+
+\textbf{主要改进：}
+\begin{enumerate}
+\item \textbf{新增暂存和更新按钮}：允许用户暂时保存编辑进度，避免误操作导致信息丢失
+\item \textbf{优化编辑逻辑}：提供更清晰的编辑流程指引
+\item \textbf{修改记录功能}：追踪决策卡的历史变更，增强可追溯性
+\end{enumerate}
+
+\textbf{迭代理由：}通过初步展示和讨论，团队发现用户在编辑决策卡时容易因中断或误操作丢失内容。暂存功能可以让用户在未完全确定时先保存草稿，降低使用门槛。
 
 \section{原型二：只看我相关微摘要}
 
-纸质原型如图\ref{fig:prototype2}：
+\subsection{设计思路 (Make)}
+
+本原型针对信息过载问题，提供个性化订阅和多层级摘要功能。核心设计包括：
+
+\begin{enumerate}
+\item \textbf{个人中心入口}：提供消息摘要、每日任务等功能模块，并设置红点标记的"设置"入口
+\item \textbf{摘要草稿页}：包含搜索框和摘要卡片列表，支持勾选和筛选
+\item \textbf{任务分类页}：支持按任务/时间划分，包含具体任务列表和进度更改功能
+\item \textbf{设置功能页}：允许用户开启/关闭不同的订阅选项(个人、消息摘要、每日任务、每周总览、月度总览等)
+\item \textbf{视角切换页}：支持切换个人/团队/公共频道等不同视角查看信息
+\end{enumerate}
+
+\subsection{原型展示 (Show)}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{./media/image2.jpeg}
-\caption{原型二：只看我相关微摘要}
+\includegraphics[width=\textwidth]{./media/prototype2.png}
+\caption{原型二：只看我相关微摘要(左侧为初版原型,右侧为迭代改进)}
 \label{fig:prototype2}
 \end{figure}
 
-\textbf{优点：}订阅条件贴合用户需求，微摘要形式节省时间，操作路径短。
+如图\ref{fig:prototype2}所示，原型展示：
 
-\textbf{缺点：}未提供摘要视角切换（个人 / 团队 / 家校）功能；推送频率未设置自定义选项，可能造成打扰。缺少个性化和自定义的功能。
+\textbf{左侧 - 初版原型：}
+\begin{itemize}
+\item \textbf{图1 - 个人中心}：包含消息摘要、每日任务等功能入口，设置按钮用红色标记
+\item \textbf{图2 - 摘要草稿页}：包含搜索框和摘要卡片列表，支持勾选和筛选功能
+\item \textbf{图3 - 任务分类页}：支持按任务/时间划分，显示具体任务列表，支持进度更改和时间显示
+\end{itemize}
 
-\subsection{迭代过程}
+\textbf{右侧 - 三个主要迭代改进：}
 
-迭代版本在原版的基础上增加了自定义功能，使得用户能在原来的基础上更加灵活的接收到自己想要的内容。
+\textbf{修改1 - 订阅设置功能}(右上 左)：
+\begin{itemize}
+\item 用户点击"设置"后进入配置页面
+\item 可以开启/关闭不同类型的订阅：个人、消息摘要、每日任务、每周总览、月度总览、固定权限
+\item 使用开关按钮控制功能启用状态
+\item 让用户个性化选择订阅消息汇总方式
+\end{itemize}
 
-增加了切换视角的功能，用户能够从多个视角准确找到自己想要的内容。
+\textbf{修改2 - 视角切换功能}(右上 右)：
+\begin{itemize}
+\item 点击个人头像后可切换视角
+\item 支持"我"、"团队"、"公共频道"等不同视角
+\item 每个视角显示对应的主要信息
+\item 协作过程中查看不同角色的信息和任务
+\item 注意：他人任务有权限访问限制，区分私密和公共信息
+\end{itemize}
 
-优化了 UI 的逻辑，用户能够更加明了的了解内容。
+\textbf{修改3 - 标签与卡片分类}(右下)：
+\begin{itemize}
+\item \textbf{标签功能}：左侧展示多个标签(label 1-4)，每个标签可勾选并选择不同样式
+\item \textbf{卡片分类}：右侧按"工作"、"学习"、"其它"等类别组织信息，每个分类显示对应的卡片
+\item 支持自定义标签样式和分类管理
+\end{itemize}
+
+\subsection{评估与反思 (Learn)}
+
+\textbf{优点：}
+\begin{itemize}
+\item 订阅条件贴合用户需求
+\item 微摘要形式节省阅读时间
+\item 操作路径短，一目了然
+\item 支持按任务/时间等多维度查看
+\end{itemize}
+
+\textbf{缺点：}
+\begin{itemize}
+\item 初版未提供摘要视角切换（个人/团队/家校）功能
+\item 推送频率未设置自定义选项，可能造成打扰
+\item 缺少个性化和自定义功能
+\item UI交互缺少更多个性化互动，如：
+  \begin{enumerate}
+    \item 标签设置
+    \item 推送频率自定义
+    \item 卡片分类
+    \item 重要紧急程度分级
+  \end{enumerate}
+\end{itemize}
+
+\subsection{迭代改进}
+
+\textbf{主要改进：}
+\begin{enumerate}
+\item \textbf{增加自定义订阅功能}：用户可以在设置页面灵活选择需要的订阅类型(个人、消息摘要、每日任务、每周总览、月度总览等)
+\item \textbf{新增视角切换功能}：用户能够从"我"、"团队"、"公共频道"等多个视角准确找到自己想要的内容，有利于团队协作和权限管理
+\item \textbf{优化UI逻辑}：
+  \begin{itemize}
+    \item 增加标签系统，支持自定义标签样式
+    \item 增加卡片分类(工作/学习/其它)
+    \item 用户能够更加明了地了解和组织内容
+  \end{itemize}
+\end{enumerate}
+
+\textbf{迭代理由：}初版设计虽然简洁，但缺乏灵活性。通过团队讨论发现，不同用户对信息摘要的需求差异很大：有的用户希望每日汇总，有的只关心@自己的消息，有的需要团队视角。因此迭代版本重点增强了个性化配置能力，让用户可以根据自己的工作习惯定制摘要方式。
 
 \section{原型三：行动抽取与同步}
 
-纸质原型如图\ref{fig:prototype3}：
+\subsection{设计思路 (Make)}
+
+本原型解决从群聊到任务管理的自动化问题，实现行动卡的提取、编辑和多工具同步。核心设计分为三个部分：
+
+\subsubsection{一、核心触发}
+\begin{itemize}
+\item \textbf{触发方式}：聊天界面长按消息，通过更多菜单选择[提取行动卡]
+\item \textbf{智能识别}：AI自动识别"负责人/任务内容/截止时间/依据"并填入
+\item \textbf{文本范围选择}：用户可以选中文本片段的开始和结束位置，确认或取消提取
+\end{itemize}
+
+\subsubsection{二、编辑行动卡}
+简洁表单，支持多次识别结果。底部提供多种功能：
+\begin{itemize}
+\item \textbf{第一栏功能}：分享、收藏、编辑、删除、更多
+\item \textbf{第二栏快捷操作}：昨天、今天、明天快速设置截止日期
+\item \textbf{同步选项}：支持同步至日历、看板、表格等外部工具
+\end{itemize}
+
+\subsubsection{三、状态回写}
+\begin{itemize}
+\item \textbf{四种状态}：待处理、进行中、已完成、异常
+\item \textbf{自动回写}：状态变更后自动生成简报信息，可选择同步到群聊
+\item \textbf{搜索与筛选}：支持通过搜索栏快速定位特定行动卡
+\end{itemize}
+
+\subsection{原型展示 (Show)}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.8\textwidth]{./media/image3.jpeg}
-\caption{原型三：行动抽取与同步}
+\includegraphics[width=\textwidth]{./media/prototype3.png}
+\caption{原型三：行动抽取与同步(左侧为初版原型,右侧为迭代改进)}
 \label{fig:prototype3}
 \end{figure}
 
-\textbf{优点：}行动提取流程简单，支持多工具同步，状态回写满足闭环需求。
+如图\ref{fig:prototype3}所示，原型展示了完整的行动卡流程：
 
-\textbf{缺点：}依赖长按触发提取，入口不够直观；未展示任务依赖关系，异常提醒机制未体现。
+\textbf{左侧 - 初版原型的三个核心部分：}
 
-\subsection{迭代过程}
+\begin{itemize}
+\item \textbf{一、核心触发}(左上)：
+  \begin{itemize}
+    \item 聊天界面展示消息列表
+    \item 长按消息后弹出提取窗口
+    \item 用户可选择文本片段的开始和结束位置
+    \item 提供"确认"和"取消"按钮
+  \end{itemize}
+
+\item \textbf{二、编辑行动卡}(左中)：
+  \begin{itemize}
+    \item 简洁的表单界面，显示任务详细信息
+    \item 底部第一栏：分享、收藏、编辑、删除、更多功能
+    \item 底部第二栏：昨天、今天、明天快捷日期选择
+    \item 支持同步至日历、看板、表格
+  \end{itemize}
+
+\item \textbf{三、状态回写}(左下)：
+  \begin{itemize}
+    \item 搜索栏支持快速定位
+    \item 四种状态：待处理、进行中、已完成、异常
+    \item 状态变更后自动生成简报并同步
+  \end{itemize}
+\end{itemize}
+
+\textbf{右侧 - 三个主要迭代改进：}
+
+\begin{itemize}
+\item \textbf{改进1 - 优化提取入口}(右上)：
+  \begin{itemize}
+    \item 在群聊界面新增浮窗式「+」号按钮
+    \item 浮窗直接显示行动卡列表
+    \item 入口更加直观，无需长按即可访问
+  \end{itemize}
+
+\item \textbf{改进2 - 补充依赖关系}(右中)：
+  \begin{itemize}
+    \item 行动卡编辑页新增「关联」按钮
+    \item 支持选择已有行动卡建立依赖关系
+    \item 可视化展示任务间的关联和依赖
+  \end{itemize}
+
+\item \textbf{改进3 - 状态回写细化}(虽未直接展示，但在说明中体现)：
+  \begin{itemize}
+    \item 增加异常提醒机制
+    \item 支持截止前自动提醒
+    \item 异常状态以红色卡片突出显示
+  \end{itemize}
+\end{itemize}
+
+\subsection{评估与反思 (Learn)}
+
+\textbf{优点：}
+\begin{itemize}
+\item 行动提取流程简单，AI辅助降低手工输入成本
+\item 支持多工具同步(日历、看板、表格)，满足不同场景需求
+\item 状态回写满足闭环需求，信息可追溯
+\item 底部功能栏设计合理，常用操作触手可及
+\end{itemize}
+
+\textbf{缺点：}
+\begin{itemize}
+\item 依赖长按触发提取，入口不够直观
+\item 未充分展示任务依赖关系
+\item 异常提醒机制未体现
+\item 初版缺少快捷入口，用户需要多步操作才能提取行动卡
+\end{itemize}
+
+\subsection{迭代改进}
+
+\textbf{主要改进：}
 
 \begin{enumerate}
-\item \textbf{优化提取入口：}在群聊输入框旁新增「+」号按钮，直接包含「提取行动卡」选项，入口更直观。
+\item \textbf{优化提取入口：}
+  \begin{itemize}
+    \item 在群聊输入框旁新增浮窗式「+」号按钮
+    \item 直接包含「提取行动卡」选项
+    \item 入口更直观，减少操作步骤
+  \end{itemize}
 
-\item \textbf{补充依赖关系展示：}行动卡编辑页新增「添加依赖任务」选项，支持选择已有的行动卡建立关联，关联后在详情页以「箭头」标注。
+\item \textbf{补充依赖关系展示：}
+  \begin{itemize}
+    \item 行动卡编辑页新增「关联」按钮
+    \item 支持选择已有的行动卡建立依赖关系
+    \item 关联后在详情页以箭头或流程图形式呈现
+    \item 帮助用户理解任务间的前后依赖
+  \end{itemize}
 
-\item \textbf{增加异常提醒：}设置「截止前 1 天」「截止前 6 小时」自动提醒，异常状态（如逾期未完成）以红色卡片形式推送至用户，支持点击「处理异常」快速反馈。
+\item \textbf{增加异常提醒机制：}
+  \begin{itemize}
+    \item 设置「截止前 1 天」「截止前 6 小时」自动提醒
+    \item 异常状态（如逾期未完成）以红色卡片形式推送至用户
+    \item 支持点击「处理异常」快速反馈和调整
+  \end{itemize}
 \end{enumerate}
+
+\textbf{迭代理由：}初版设计虽然功能完整，但在实际演示中发现：
+\begin{itemize}
+\item 长按操作对新用户不够友好，容易忽略该功能
+\item 复杂项目中任务间有依赖关系，需要可视化展示避免遗漏
+\item 缺少主动提醒机制，用户需要频繁检查任务状态
+\end{itemize}
+
+因此迭代版本重点优化了入口可见性、增强了任务关系管理，并引入智能提醒机制，使整个行动卡系统更加完善。
 
 \end{document}
