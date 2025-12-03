@@ -1,0 +1,255 @@
+/* ==================== Keyframe Animations ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-120%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+    }
+}
+
+/* ==================== Animation Classes ==================== */
+[data-animation-delay] {
+    opacity: 0;
+    animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+[data-animation-delay="0"] {
+    animation-delay: 0s;
+}
+
+[data-animation-delay="100"] {
+    animation-delay: 0.1s;
+}
+
+[data-animation-delay="150"] {
+    animation-delay: 0.15s;
+}
+
+[data-animation-delay="200"] {
+    animation-delay: 0.2s;
+}
+
+[data-animation-delay="300"] {
+    animation-delay: 0.3s;
+}
+
+[data-animation-delay="400"] {
+    animation-delay: 0.4s;
+}
+
+[data-animation-delay="450"] {
+    animation-delay: 0.45s;
+}
+
+[data-animation-delay="500"] {
+    animation-delay: 0.5s;
+}
+
+[data-animation-delay="600"] {
+    animation-delay: 0.6s;
+}
+
+[data-animation-delay="700"] {
+    animation-delay: 0.7s;
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 1024px) {
+    .slide-content {
+        padding: 2.5rem 2rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-content {
+        padding: 1.75rem 1.5rem;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .main-title {
+        font-size: 3rem;
+    }
+
+    .toc-grid,
+    .problems-grid,
+    .rq-grid,
+    .strength-cards,
+    .signals-grid,
+    .system-overview,
+    .reasons,
+    .patterns-grid,
+    .takeaway-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .two-col,
+    .two-col-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .workflow-container {
+        flex-direction: column;
+    }
+
+    .workflow-arrow {
+        transform: rotate(90deg);
+        margin: 0.75rem 0;
+    }
+
+    .nav-controls {
+        bottom: 1.5rem;
+        padding: 0.75rem 1.25rem;
+        gap: 1rem;
+    }
+
+    .nav-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1rem;
+    }
+
+    .slide-indicators {
+        right: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .slide-content {
+        padding: 1.25rem 1rem;
+        border-radius: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .toc-item {
+        padding: 1.5rem;
+    }
+
+    .rq-card {
+        padding: 1.5rem;
+    }
+}
+
+/* ==================== Smooth Scroll Behavior ==================== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ==================== Enhanced Hover Effects ==================== */
+.interactive-element {
+    transition: var(--transition);
+}
+
+.interactive-element:hover {
+    transform: translateY(-2px);
+}
+
+/* ==================== Print Styles ==================== */
+@media print {
+
+    .nav-controls,
+    .slide-indicators,
+    .progress-bar {
+        display: none;
+    }
+
+    .slide-content {
+        box-shadow: none;
+        border: 1px solid var(--gray-300);
+    }
+}
+
+/* ==================== Dark Mode Support (Future) ==================== */
+@media (prefers-color-scheme: dark) {
+    /* Dark mode styles can be added here */
+}
+
+/* ==================== Reduced Motion ==================== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

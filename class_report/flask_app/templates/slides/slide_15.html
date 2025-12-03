@@ -1,0 +1,83 @@
+<!-- Slide 15: Results RQ2 -->
+<section class="slide" data-slide="15">
+    <div class="slide-number">15/20</div>
+    <div class="slide-content">
+        <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">💬 结果 - RQ2: 社交解释的价值</h2>
+
+        <!-- Figure 7: 离线评估柱状图 -->
+        <div data-animation-delay="0" style="margin-bottom: 1.2rem;">
+            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 0.5rem; font-weight: 600;">Figure 7: 离线评估结果 - 4种条件对比 (N=540, 28参与者)</p>
+            <div style="background: white; border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 140px; gap: 0.8rem; padding: 0 1rem;">
+                    <!-- 条件1: TLDR -->
+                    <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                        <div style="width: 100%; display: flex; gap: 3px; justify-content: center; align-items: flex-end;">
+                            <div style="width: 20px; height: 45px; background: #94A3B8; border-radius: 3px 3px 0 0;" title="简洁性"></div>
+                            <div style="width: 20px; height: 50px; background: #64748B; border-radius: 3px 3px 0 0;" title="有趣程度"></div>
+                            <div style="width: 20px; height: 35px; background: #475569; border-radius: 3px 3px 0 0;" title="帮助理解相关性"></div>
+                        </div>
+                        <span style="font-size: 0.7rem; margin-top: 0.5rem; color: var(--gray-600); text-align: center;">C1: TLDR<br><span style="font-size: 0.6rem; color: var(--gray-400);">仅摘要</span></span>
+                    </div>
+                    <!-- 条件2: Template -->
+                    <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                        <div style="width: 100%; display: flex; gap: 3px; justify-content: center; align-items: flex-end;">
+                            <div style="width: 20px; height: 70px; background: #FCD34D; border-radius: 3px 3px 0 0;" title="简洁性"></div>
+                            <div style="width: 20px; height: 40px; background: #F59E0B; border-radius: 3px 3px 0 0;" title="有趣程度"></div>
+                            <div style="width: 20px; height: 45px; background: #D97706; border-radius: 3px 3px 0 0;" title="帮助理解相关性"></div>
+                        </div>
+                        <span style="font-size: 0.7rem; margin-top: 0.5rem; color: var(--gray-600); text-align: center;">C2: Template<br><span style="font-size: 0.6rem; color: var(--gray-400);">仅社交信号</span></span>
+                    </div>
+                    <!-- 条件3: Template+TLDR -->
+                    <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                        <div style="width: 100%; display: flex; gap: 3px; justify-content: center; align-items: flex-end;">
+                            <div style="width: 20px; height: 55px; background: #86EFAC; border-radius: 3px 3px 0 0;" title="简洁性"></div>
+                            <div style="width: 20px; height: 75px; background: #22C55E; border-radius: 3px 3px 0 0;" title="有趣程度"></div>
+                            <div style="width: 20px; height: 85px; background: #16A34A; border-radius: 3px 3px 0 0;" title="帮助理解相关性"></div>
+                        </div>
+                        <span style="font-size: 0.7rem; margin-top: 0.5rem; color: var(--gray-600); text-align: center;">C3: Template<br>+TLDR</span>
+                    </div>
+                    <!-- 条件4: LLM Synthesis (PaperPing) -->
+                    <div style="display: flex; flex-direction: column; align-items: center; flex: 1; position: relative;">
+                        <div style="position: absolute; top: -20px; background: var(--primary-blue); color: white; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px;">⭐ PaperPing</div>
+                        <div style="width: 100%; display: flex; gap: 3px; justify-content: center; align-items: flex-end;">
+                            <div style="width: 20px; height: 50px; background: #93C5FD; border-radius: 3px 3px 0 0;" title="简洁性"></div>
+                            <div style="width: 20px; height: 90px; background: #3B82F6; border-radius: 3px 3px 0 0;" title="有趣程度"></div>
+                            <div style="width: 20px; height: 95px; background: #1D4ED8; border-radius: 3px 3px 0 0;" title="帮助理解相关性"></div>
+                        </div>
+                        <span style="font-size: 0.7rem; margin-top: 0.5rem; color: var(--gray-600); text-align: center;">C4: LLM<br>Synthesis</span>
+                    </div>
+                </div>
+                <!-- 图例 -->
+                <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 0.8rem; padding-top: 0.5rem; border-top: 1px solid var(--gray-200);">
+                    <span style="font-size: 0.7rem; color: var(--gray-600); display: flex; align-items: center; gap: 4px;"><span style="width: 12px; height: 12px; background: #94A3B8; border-radius: 2px;"></span>简洁性</span>
+                    <span style="font-size: 0.7rem; color: var(--gray-600); display: flex; align-items: center; gap: 4px;"><span style="width: 12px; height: 12px; background: #64748B; border-radius: 2px;"></span>有趣程度</span>
+                    <span style="font-size: 0.7rem; color: var(--gray-600); display: flex; align-items: center; gap: 4px;"><span style="width: 12px; height: 12px; background: #475569; border-radius: 2px;"></span>帮助理解相关性</span>
+                </div>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.3rem; font-style: italic;">*** p &lt; 0.001 (混合序数逻辑回归, Tukey校正)</p>
+        </div>
+
+        <!-- 访谈发现 -->
+        <div class="feature-grid" data-animation-delay="300" style="gap: 1rem;">
+            <div class="feature-card" style="padding: 1rem;">
+                <div class="feature-icon" style="font-size: 1.5rem;">👁️</div>
+                <h4 class="feature-title" style="font-size: 1rem;">快速筛选</h4>
+                <p class="feature-desc" style="font-size: 0.9rem;">"只需看一眼提到了谁，就知道值不值得读" (P17)</p>
+            </div>
+            <div class="feature-card" style="padding: 1rem;">
+                <div class="feature-icon" style="font-size: 1.5rem;">🤝</div>
+                <h4 class="feature-title" style="font-size: 1rem;">建立信任</h4>
+                <p class="feature-desc" style="font-size: 0.9rem;">社交信号提供透明度，让用户信任AI推荐逻辑 (P8)</p>
+            </div>
+            <div class="feature-card" style="padding: 1rem;">
+                <div class="feature-icon" style="font-size: 1.5rem;">⚖️</div>
+                <h4 class="feature-title" style="font-size: 1rem;">平衡挑战</h4>
+                <p class="feature-desc" style="font-size: 0.9rem;">LLM可能过度解读，用户更喜欢<strong>原始emoji</strong></p>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #EDE9FE, #DBEAFE); padding: 0.8rem 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid var(--secondary-purple);" data-animation-delay="500">
+            <p style="font-size: 0.9rem; margin: 0; color: var(--gray-700);"><strong>🔑 核心洞察:</strong> <em>社交导航</em> (Social Navigation) — 信息过载时代，筛选依据往往是"谁在关注"而非"内容本身"</p>
+        </div>
+    </div>
+</section>

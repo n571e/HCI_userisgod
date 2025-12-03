@@ -1,0 +1,193 @@
+/* Fix for Slide 8 - Methodology */
+.methodology-flow {
+    gap: 10px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.method-step {
+    padding: 15px !important;
+    flex: 1 !important;
+}
+
+.method-step.highlight {
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.deployment-stats {
+    margin-top: 10px !important;
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+}
+
+.stat-number {
+    font-size: 2.2em !important;
+    line-height: 1.1 !important;
+}
+
+.stat-label {
+    font-size: 14px !important;
+    margin-top: 5px !important;
+    color: #2c3e50 !important;
+    font-weight: 500 !important;
+}
+
+/* Fix for Slide 10 - Workflow */
+.workflow-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 5px !important;
+    margin: 10px 0 !important;
+}
+
+.workflow-step {
+    flex: 1 !important;
+    min-width: 0 !important;
+    padding: 10px 5px !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+.workflow-step h3 {
+    font-size: 0.9em !important;
+    margin-bottom: 4px !important;
+}
+
+.workflow-step p {
+    font-size: 0.75em !important;
+    line-height: 1.2 !important;
+    margin-bottom: 4px !important;
+}
+
+.workflow-arrow {
+    font-size: 1.2em !important;
+    align-self: center !important;
+    margin: 0 2px !important;
+}
+
+.step-circle {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 1.2em !important;
+    margin: 0 auto 5px !important;
+    line-height: 35px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.example-text {
+    font-size: 0.7em !important;
+    margin-top: 4px !important;
+}
+
+#workflowCanvas {
+    display: none !important;
+}
+
+/* Fix for Slide 13 - Prompt Chain */
+.prompt-chain {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    gap: 5px !important;
+    margin: 15px 0 !important;
+}
+
+.prompt-step {
+    flex: 1 !important;
+    padding: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+.prompt-step p {
+    margin-bottom: 0 !important;
+    font-size: 0.85em !important;
+}
+
+.chain-arrow {
+    transform: rotate(-90deg);
+    align-self: center;
+    margin: 0 !important;
+    font-size: 1.2em !important;
+}
+
+.why-chain {
+    margin-top: 15px !important;
+}
+
+.why-chain h3 {
+    font-size: 1.2em !important;
+    margin-bottom: 10px !important;
+}
+
+.reasons {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    margin-top: 10px !important;
+}
+
+.reason-item {
+    flex: 1 !important;
+    padding: 10px !important;
+}
+
+.reason-item p {
+    font-size: 0.85em !important;
+}
+
+/* Fix for Slide 18 - Four Levels */
+.levels-pyramid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin: 15px 0 !important;
+    max-width: 800px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.pyramid-level {
+    padding: 10px 15px !important;
+    gap: 15px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.pyramid-level h4 {
+    font-size: 1em !important;
+    margin-bottom: 2px !important;
+}
+
+.pyramid-level p {
+    font-size: 0.85em !important;
+    margin-bottom: 2px !important;
+}
+
+.level-number {
+    padding: 5px 10px !important;
+    font-size: 0.9em !important;
+    min-width: 80px !important;
+    text-align: center !important;
+}
+
+.level-tag {
+    padding: 2px 8px !important;
+    font-size: 0.75em !important;
+    margin-top: 4px !important;
+}
+
+.level-content {
+    flex: 1 !important;
+}

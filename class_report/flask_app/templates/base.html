@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Social-RAG: 从群组互动中检索以实现AI生成的社交接地{% endblock %}</title>
+
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/slides.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fixes.css') }}">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn prev-btn" aria-label="上一页">←</button>
+        <span class="slide-counter"><span class="current-slide">1</span> / <span class="total-slides">20</span></span>
+        <button class="nav-btn next-btn" aria-label="下一页">→</button>
+    </div>
+
+    <!-- Slide Indicators -->
+    <div class="slide-indicators"></div>
+
+    {% block content %}{% endblock %}
+
+    <!-- JavaScript Modules -->
+    <script src="{{ url_for('static', filename='js/navigation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/visualizations.js') }}"></script>
+</body>
+
+</html>

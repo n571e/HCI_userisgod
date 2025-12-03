@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social-RAG Presentation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button id="prev-btn" class="nav-btn"><i class="fas fa-chevron-up"></i></button>
+        <div class="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+        <button id="next-btn" class="nav-btn"><i class="fas fa-chevron-down"></i></button>
+    </div>
+
+    <main id="presentation-container">
+
+        <!-- Slide 1: Title -->
+        <section class="slide active" id="slide-title">
+            <div class="bg-animation" id="particles-js"></div>
+            <div class="content-center">
+                <div class="glass-card title-card">
+                    <h1 class="gradient-text">Social-RAG</h1>
+                    <h2>Retrieving from Group Interactions to Socially Ground AI Generation</h2>
+                    <p class="subtitle">从群组互动中检索以实现 AI 生成的社交接地</p>
+                    <div class="meta-info">
+                        <span><i class="fas fa-users"></i> Ruotong Wang et al.</span>
+                        <span><i class="fas fa-map-marker-alt"></i> CHI 2025</span>
+                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <span>Scroll to Start</span>
+                    <i class="fas fa-chevron-down bounce"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: The Big Picture -->
+        <section class="slide" id="slide-intro">
+            <div class="content-container">
+                <h2 class="slide-title">The Big Picture <span class="chinese-sub">宏观背景</span></h2>
+                <div class="grid-2-col">
+                    <div class="glass-card">
+                        <h3><i class="fas fa-robot"></i> The Problem</h3>
+                        <p>AI in group chats is often <strong>awkward</strong> and <strong>socially unaware</strong>.</p>
+                        <p>Current RAG retrieves <em>Facts</em>, but misses <em>Social Context</em>.</p>
+                    </div>
+                    <div class="glass-card highlight-card">
+                        <h3><i class="fas fa-lightbulb"></i> The Solution: Social-RAG</h3>
+                        <p>Retrieving <strong>Group Interactions</strong> (chats, reactions) to ground AI generation.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Understands "Who knows what"</li>
+                            <li><i class="fas fa-check"></i> Learns from implicit feedback</li>
+                            <li><i class="fas fa-check"></i> Acts like an "Invited Guest"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: The Gap (Comparison) -->
+        <section class="slide" id="slide-gap">
+            <div class="content-container">
+                <h2 class="slide-title">The Gap <span class="chinese-sub">研究背景与差异</span></h2>
+                <div class="comparison-container">
+                    <div class="compare-box traditional">
+                        <h3>Traditional RAG</h3>
+                        <div class="icon-box"><i class="fas fa-database"></i></div>
+                        <ul>
+                            <li>Source: Wikipedia, Docs</li>
+                            <li>Focus: <strong>Factual Accuracy</strong></li>
+                            <li>Output: "Here is the answer."</li>
+                            <li class="negative">Socially Blind</li>
+                        </ul>
+                    </div>
+                    <div class="vs-badge">VS</div>
+                    <div class="compare-box social">
+                        <h3>Social-RAG</h3>
+                        <div class="icon-box"><i class="fas fa-users-cog"></i></div>
+                        <ul>
+                            <li>Source: Chat History, Reactions</li>
+                            <li>Focus: <strong>Social Relevance</strong></li>
+                            <li>Output: "@Alice, since you liked..."</li>
+                            <li class="positive">Socially Grounded</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Methodology Timeline -->
+        <section class="slide" id="slide-method">
+            <div class="content-container">
+                <h2 class="slide-title">Methodology <span class="chinese-sub">研究方法论</span></h2>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content glass-card">
+                            <h3>Formative Study</h3>
+                            <p>Interviews (N=13) & Survey (N=26)</p>
+                            <span class="tag">Insight</span>
+                            <p class="small">Users want neutral, short summaries with social context.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-item-content glass-card">
+                            <h3>System Design</h3>
+                            <p>Built <strong>PaperPing</strong></p>
+                            <p>A Slack bot implementing Social-RAG workflow.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content glass-card">
+                            <h3>Field Deployment</h3>
+                            <p><strong>18 Slack Channels</strong> (500+ users)</p>
+                            <p>Duration: <strong>3 Months</strong></p>
+                            <span class="tag highlight">High Ecological Validity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: System Design (Interactive) -->
+        <section class="slide" id="slide-system">
+            <div class="content-container">
+                <h2 class="slide-title">Social-RAG Workflow <span class="chinese-sub">系统工作流</span></h2>
+                <div class="workflow-diagram">
+                    <div class="step" id="step-index" onclick="showStep('index')">
+                        <div class="step-icon"><i class="fas fa-layer-group"></i></div>
+                        <span>1. Index</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="step" id="step-retrieve" onclick="showStep('retrieve')">
+                        <div class="step-icon"><i class="fas fa-search"></i></div>
+                        <span>2. Retrieve</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="step" id="step-generate" onclick="showStep('generate')">
+                        <div class="step-icon"><i class="fas fa-magic"></i></div>
+                        <span>3. Generate</span>
+                    </div>
+                    <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="step" id="step-feedback" onclick="showStep('feedback')">
+                        <div class="step-icon"><i class="fas fa-sync"></i></div>
+                        <span>4. Feedback</span>
+                    </div>
+                </div>
+                
+                <div class="workflow-details glass-card" id="workflow-details-box">
+                    <h3 id="detail-title">Select a step above</h3>
+                    <p id="detail-desc">Click on the workflow nodes to understand the technical details.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: PaperPing Demo (Chat Sim) -->
+        <section class="slide" id="slide-demo">
+            <div class="content-container">
+                <h2 class="slide-title">PaperPing in Action <span class="chinese-sub">系统演示</span></h2>
+                <div class="slack-mockup glass-card">
+                    <div class="slack-header">
+                        <span class="channel-name">#lab-reading-group</span>
+                    </div>
+                    <div class="slack-body" id="chat-window">
+                        <!-- Messages will be injected by JS -->
+                    </div>
+                    <div class="slack-input">
+                        <div class="fake-input">Message #lab-reading-group</div>
+                    </div>
+                </div>
+                <button class="replay-btn" onclick="startChatSim()">Replay Demo <i class="fas fa-play"></i></button>
+            </div>
+        </section>
+
+        <!-- Slide 7: Results -->
+        <section class="slide" id="slide-results">
+            <div class="content-container">
+                <h2 class="slide-title">Results <span class="chinese-sub">研究结果</span></h2>
+                <div class="results-grid">
+                    <div class="stat-card glass-card">
+                        <div class="stat-number">75.7%</div>
+                        <div class="stat-label">Relevance</div>
+                        <p>Recommendations deemed relevant to group interests.</p>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <div class="stat-number">88%</div>
+                        <div class="stat-label">Low Effort</div>
+                        <p>Users felt using the system required almost no effort.</p>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>Explanation Effectiveness</h3>
+                        <div class="bar-chart">
+                            <div class="bar-row">
+                                <span class="label">TLDR Only</span>
+                                <div class="bar" style="width: 40%;"></div>
+                                <span class="value">3.2</span>
+                            </div>
+                            <div class="bar-row">
+                                <span class="label">Social-RAG</span>
+                                <div class="bar highlight" style="width: 85%;"></div>
+                                <span class="value">4.5</span>
+                            </div>
+                        </div>
+                        <p class="caption">Social explanations significantly improve perceived relevance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Theory -->
+        <section class="slide" id="slide-theory">
+            <div class="content-container">
+                <h2 class="slide-title">Theoretical Contribution <span class="chinese-sub">理论贡献：社交接地层级</span></h2>
+                <div class="pyramid-container">
+                    <div class="pyramid-level level-3" onclick="showTheory('l3')">
+                        <span>Level 3: Individual-level Grounding</span>
+                    </div>
+                    <div class="pyramid-level level-2" onclick="showTheory('l2')">
+                        <span>Level 2: Group-level Grounding</span>
+                    </div>
+                    <div class="pyramid-level level-1" onclick="showTheory('l1')">
+                        <span>Level 1: Category-level Grounding</span>
+                    </div>
+                    <div class="pyramid-level level-0" onclick="showTheory('l0')">
+                        <span>Level 0: No Grounding</span>
+                    </div>
+                </div>
+                <div class="theory-details glass-card">
+                    <p id="theory-text">Click levels to explore.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Takeaways -->
+        <section class="slide" id="slide-takeaways">
+            <div class="content-container">
+                <h2 class="slide-title">Takeaways <span class="chinese-sub">总结与启示</span></h2>
+                <div class="cards-row">
+                    <div class="takeaway-card glass-card">
+                        <div class="icon"><i class="fas fa-brain"></i></div>
+                        <h3>Context is King</h3>
+                        <p>Social context is as important as factual context for group AI.</p>
+                    </div>
+                    <div class="takeaway-card glass-card">
+                        <div class="icon"><i class="fas fa-ghost"></i></div>
+                        <h3>Implicit > Explicit</h3>
+                        <p>Learning from digital traces is better than asking users to fill forms.</p>
+                    </div>
+                    <div class="takeaway-card glass-card">
+                        <div class="icon"><i class="fas fa-user-friends"></i></div>
+                        <h3>Social Actor</h3>
+                        <p>AI should behave like a polite "Invited Guest", not a spammer.</p>
+                    </div>
+                </div>
+                <div class="end-credits">
+                    <h3>Thank You</h3>
+                    <p>Q & A</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

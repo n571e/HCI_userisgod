@@ -1,0 +1,60 @@
+<!-- Slide 9: Step 3 - Generation -->
+<section class="slide" data-slide="9">
+    <div class="slide-number">9/20</div>
+    <div class="slide-content">
+        <h2 style="font-size: 2.4rem;">✍️ Step 3: 基于社交接地的生成</h2>
+
+        <div class="comparison-container" data-animation-delay="0">
+            <div class="comparison-card">
+                <h4 style="font-size: 1.25rem;">❌ 简单做法</h4>
+                <p style="font-size: 1.1rem;">一个超长Prompt<br>把所有信息塞给LLM</p>
+                <div class="badge warning" style="font-size: 1rem;">容易混乱和幻觉</div>
+            </div>
+            <div class="comparison-vs">→</div>
+            <div class="comparison-card">
+                <h4 style="font-size: 1.25rem;">✅ PaperPing方案</h4>
+                <p style="font-size: 1.1rem;"><strong>Prompt Chaining</strong><br>链式调用，分步处理</p>
+                <div class="badge success" style="font-size: 1rem;">逻辑清晰</div>
+            </div>
+        </div>
+
+        <div class="process-flow" data-animation-delay="300" style="margin-top: 2rem;">
+            <div class="process-step">
+                <div class="process-number">1</div>
+                <h4 class="process-title" style="font-size: 1.15rem;">Prompt 1</h4>
+                <p class="process-desc" style="font-size: 1.05rem;">总结论文内容</p>
+            </div>
+            <div class="process-arrow">→</div>
+
+            <div class="process-step">
+                <div class="process-number">2</div>
+                <h4 class="process-title" style="font-size: 1.15rem;">Prompt 2</h4>
+                <p class="process-desc" style="font-size: 1.05rem;">解释与旧论文关系</p>
+            </div>
+            <div class="process-arrow">→</div>
+
+            <div class="process-step">
+                <div class="process-number">3</div>
+                <h4 class="process-title" style="font-size: 1.15rem;">Prompt 3</h4>
+                <p class="process-desc" style="font-size: 1.05rem;">解释与特定用户关系</p>
+            </div>
+            <div class="process-arrow">→</div>
+
+            <div class="process-step">
+                <div class="process-number">4</div>
+                <h4 class="process-title" style="font-size: 1.15rem;">Synthesis</h4>
+                <p class="process-desc" style="font-size: 1.05rem;">综合生成友好文案</p>
+            </div>
+        </div>
+
+        <div class="highlight-box-enhanced" data-animation-delay="600" style="margin-top: 2rem;">
+            <p style="font-size: 1.15rem;"><strong>Prompt策略:</strong></p>
+            <ul class="enhanced-list" style="font-size: 1.1rem;">
+                <li>严格限制字数（适应Slack阅读）</li>
+                <li>使用Markdown格式（加粗关键词）</li>
+                <li>要求友好、客观的语气</li>
+                <li>必须包含论文链接</li>
+            </ul>
+        </div>
+    </div>
+</section>

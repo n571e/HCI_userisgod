@@ -1,0 +1,48 @@
+<!-- Slide 13: Offline Evaluation -->
+<section class="slide" data-slide="13">
+    <div class="slide-number">13/20</div>
+    <div class="slide-content">
+        <h2 style="font-size: 2.4rem;">🧪 离线评估任务设计</h2>
+
+        <p class="large-text" style="text-align: center; margin: 1.5rem 0; font-size: 1.3rem;">
+            对比<strong>4种条件</strong>，验证社交解释的效果
+        </p>
+
+        <div class="process-flow" style="flex-wrap: wrap;">
+            <div class="process-step" data-animation-delay="0" style="flex: 1 1 45%;">
+                <div class="process-number">1</div>
+                <h4 class="process-title" style="font-size: 1.2rem;">TLDR</h4>
+                <p class="process-desc" style="font-size: 1.05rem;">仅论文摘要<br>（GPT生成）</p>
+            </div>
+
+            <div class="process-step" data-animation-delay="150" style="flex: 1 1 45%;">
+                <div class="process-number">2</div>
+                <h4 class="process-title" style="font-size: 1.2rem;">Template</h4>
+                <p class="process-desc" style="font-size: 1.05rem;">仅社交信号<br>（套模板）</p>
+            </div>
+
+            <div class="process-step" data-animation-delay="300" style="flex: 1 1 45%;">
+                <div class="process-number">3</div>
+                <h4 class="process-title" style="font-size: 1.2rem;">Template+TLDR</h4>
+                <p class="process-desc" style="font-size: 1.05rem;">模板社交信号<br>+ 摘要</p>
+            </div>
+
+            <div class="process-step" data-animation-delay="450"
+                style="flex: 1 1 45%; border-color: var(--primary-blue); background: var(--card-gradient);">
+                <div class="process-number">4</div>
+                <h4 class="process-title" style="font-size: 1.2rem;">LLM Synthesis</h4>
+                <p class="process-desc" style="font-size: 1.05rem;"><strong>PaperPing完整版</strong><br>融合的自然语言</p>
+            </div>
+        </div>
+
+        <div class="highlight-box-enhanced" data-animation-delay="600" style="margin-top: 2rem;">
+            <p style="font-size: 1.15rem;"><strong>Within-Subjects Design (组内设计):</strong></p>
+            <ul style="list-style: none; padding-left: 0; font-size: 1.1rem;">
+                <li>✓ 每个用户评估5篇论文的4种变体</li>
+                <li>✓ 随机顺序呈现</li>
+                <li>✓ 排除论文质量的影响</li>
+                <li>✓ 评分维度：简洁性、有趣程度、帮助理解相关性</li>
+            </ul>
+        </div>
+    </div>
+</section>
