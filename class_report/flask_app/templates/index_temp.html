@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social-RAG: 从群组互动中检索以实现AI生成的社交接地</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn prev-btn" aria-label="上一页">←</button>
+        <span class="slide-counter"><span class="current-slide">1</span> / <span class="total-slides">20</span></span>
+        <button class="nav-btn next-btn" aria-label="下一页">→</button>
+    </div>
+
+    <!-- Slide Indicators -->
+    <div class="slide-indicators"></div>
+
+    <div class="presentation-container">
+
+        <!-- Slide 1: Title -->
+        <section class="slide active" data-slide="1">
+            <div class="slide-content title-slide">
+                <h1 class="main-title">Social-RAG</h1>
+                <h2 class="subtitle">从群组互动中检索以实现AI生成的社交接地</h2>
+                <p class="subtitle-en">Retrieving from Group Interactions to Socially Ground AI Generation</p>
+
+                <div class="title-info">
+                    <div class="info-item">
+                        <strong>发表会议：</strong> CHI 2025
+                    </div>
+                    <div class="info-item">
+                        <strong>作者：</strong> Ruotong Wang, Xinyi Zhou, Lin Qiu, Joseph Chee Chang, Jonathan Bragg, Amy
+                        X. Zhang
+                    </div>
+                    <div class="info-item">
+                        <strong>机构：</strong> 华盛顿大学 & 艾伦人工智能研究所
+                    </div>
+                    <div class="info-item">
+                        <strong>汇报人：</strong> [您的姓名]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Table of Contents -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2>目录</h2>
+                <div class="toc-grid">
+                    <div class="toc-item" data-animation-delay="0">
+                        <div class="toc-number">1</div>
+                        <div class="toc-text">宏观背景</div>
+                    </div>
+                    <div class="toc-item" data-animation-delay="100">
+                        <div class="toc-number">2</div>
+                        <div class="toc-text">研究背景与问题</div>
+                    </div>
+                    <div class="toc-item" data-animation-delay="200">
+                        <div class="toc-number">3</div>
+                        <div class="toc-text">研究问题</div>
+                    </div>
+                    <div class="toc-item" data-animation-delay="300">
+                        <div class="toc-number">4</div>
+                        <div class="toc-text">研究方法论</div>
+                    </div>
+                    <div class="toc-item" data-animation-delay="400">
+                        <div class="toc-number">5</div>
+                        <div class="toc-text">系统设计</div>
+                    </div>
+                    <div class="toc-item" data-animation-delay="500">
+                        <div class="toc-number">6</div>
+                        <div class="toc-text">研究结果</div>
+                    </div>
+                    <div class="toc-item" data-animation-delay="600">
+                        <div class="toc-number">7</div>
+                        <div class="toc-text">讨论与贡献</div>
+                    </div>
+                    <div class="toc-item" data-animation-delay="700">
+                        <div class="toc-number">8</div>
+                        <div class="toc-text">总结与展望</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: One-sentence Summary -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2>一句话总结</h2>
+                <div class="highlight-box" data-animation-delay="0">
+                    <p class="large-text">本文提出了一种新的工作流 <strong
+                            class="keyword">Social-RAG</strong>，通过检索群组的历史互动（如聊天记录、点赞），让 AI 智能体（Agent）能够<strong>"读懂空气"</strong>，生成符合群组兴趣和社交规范的内容。</p>
+                </div>
+
+                <div class="two-col" data-animation-delay="200">
+                    <div class="col">
+                        <h3>核心价值</h3>
+                        <ul>
+                            <li>解决 AI 在群组中"不知所措"的问题</li>
+                            <li>探索 <strong>Human-AI Collaboration</strong></li>
+                            <li>让 AI 融入人类社交空间</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h3>应用场景</h3>
+                        <div class="application-box">
+                            <div class="app-icon">📚</div>
+                            <div class="app-name">PaperPing</div>
+                            <div class="app-desc">学术论文推荐机器人</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Why It Matters -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2>时代背景：AI 从"工具"到"智能体"</h2>
+
+                <div class="evolution-timeline" data-animation-delay="0">
+                    <div class="timeline-item past">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>过去：被动工具</h4>
+                            <p>用户输入指令 → AI 输出结果</p>
+                        </div>
+                    </div>
+                    <div class="timeline-arrow">→</div>
+                    <div class="timeline-item present">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>现在：智能体</h4>
+                            <p>主动介入、提出建议、参与协作</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-box" data-animation-delay="300">
+                    <h3>🎯 关键挑战</h3>
+                    <p class="large-text">当 AI 进入多用户社交空间时，面临复杂的<strong>群体动力学</strong>（Group
+                        Dynamics）和<strong>社会规范</strong>（Social Norms）</p>
+                </div>
+
+                <div class="problem-cards" data-animation-delay="500">
+                    <div class="problem-card">
+                        <div class="problem-icon">🧠</div>
+                        <h4>智商高</h4>
+                        <p>懂百科知识</p>
+                    </div>
+                    <div class="vs">VS</div>
+                    <div class="problem-card alert">
+                        <div class="problem-icon">😰</div>
+                        <h4>情商低</h4>
+                        <p>不懂社交语境</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Current Problems -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2>现有问题：社会技术鸿沟</h2>
+
+                <div class="problems-grid" data-animation-delay="0">
+                    <div class="problem-item" data-animation-delay="0">
+                        <div class="problem-number">1</div>
+                        <h3>社交感知缺失</h3>
+                        <p>现有 AI 使用<strong>通用模板</strong>，不懂群组的特定偏好（Social Norms）</p>
+                        <div class="example">❌ "这篇论文很有趣" (对所有人都一样)</div>
+                    </div>
+
+                    <div class="problem-item" data-animation-delay="200">
+                        <div class="problem-number">2</div>
+                        <h3>"冷启动"困难</h3>
+                        <p>需要用户<strong>手动填表或投票</strong>，麻烦且干扰群组</p>
+                        <div class="example">❌ "请填写您的兴趣偏好问卷..."</div>
+                    </div>
+
+                    <div class="problem-item" data-animation-delay="400">
+                        <div class="problem-number">3</div>
+                        <h3>RAG 的局限</h3>
+                        <p>传统 RAG 检索<strong>事实知识</strong>，忽略了<strong>社交知识</strong></p>
+                        <div class="comparison">
+                            <div class="comp-item old">
+                                <strong>传统 RAG：</strong><br>
+                                检索 → 维基百科
+                            </div>
+                            <div class="comp-arrow">→</div>
+                            <div class="comp-item new">
+                                <strong>Social-RAG：</strong><br>
+                                检索 → 群组偏好、互动历史
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Core Challenge -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content centered">
+                <h2>核心挑战</h2>
+
+                <div class="central-question" data-animation-delay="0">
+                    <div class="question-mark">?</div>
+                    <h3 class="big-question">如何在不打扰用户的前提下，<br>让 AI 自动学习群组的偏好和规范？</h3>
+                </div>
+
+                <div class="challenges-list" data-animation-delay="300">
+                    <div class="challenge-item">
+                        <span class="emoji">📋</span>
+                        <p>显式反馈（填表）负担重，破坏社交体验</p>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="emoji">👍</span>
+                        <p>隐式反馈（点赞、聊天记录）如何有效利用？</p>
+                    </div>
+                    <div class="challenge-item">
+                        <span class="emoji">🚫</span>
+                        <p>AI 如何避免在群组中"刷屏"或"尴尬"？</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Research Questions -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2>四个研究问题（RQ）</h2>
+
+                <div class="rq-grid">
+                    <div class="rq-card" data-animation-delay="0">
+                        <div class="rq-label">RQ1</div>
+                        <h3>Feedback 反馈机制</h3>
+                        <p>隐式反馈机制（点赞、历史记录）收集群组兴趣的<strong>效果</strong>如何？</p>
+                        <div class="rq-icon">📊</div>
+                    </div>
+
+                    <div class="rq-card" data-animation-delay="150">
+                        <div class="rq-label">RQ2</div>
+                        <h3>Explanation 解释</h3>
+                        <p>基于社交信号的 AI 解释能否有效<strong>传达相关性</strong>？</p>
+                        <div class="rq-icon">💬</div>
+                    </div>
+
+                    <div class="rq-card" data-animation-delay="300">
+                        <div class="rq-label">RQ3</div>
+                        <h3>Practices 社交实践</h3>
+                        <p>AI 是否会<strong>破坏</strong>群组原有的社交习惯？</p>
+                        <div class="rq-icon">👥</div>
+                    </div>
+
+                    <div class="rq-card" data-animation-delay="450">
+                        <div class="rq-label">RQ4</div>
+                        <h3>Common Ground 共同基础</h3>
+                        <p>AI 能否<strong>促进</strong>群组的共同基础？</p>
+                        <div class="rq-icon">🤝</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Methodology -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2>研究方法论：用户中心设计（UCD）</h2>
+
+                <div class="methodology-flow" data-animation-delay="0">
+                    <div class="method-step">
+                        <div class="step-number">1</div>
+                        <h3>形成性研究</h3>
+                        <ul>
+                            <li>采访 <strong>13</strong> 位研究员</li>
+                            <li>问卷调查 <strong>26</strong> 人</li>
+                        </ul>
+                        <div class="finding">
+                            💡 发现：学者喜欢分享论文，但写推荐语很累
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow">↓</div>
+
+                    <div class="method-step">
+                        <div class="step-number">2</div>
+                        <h3>系统设计</h3>
+                        <p>开发 Social-RAG 工作流和 PaperPing 系统</p>
+                    </div>
+
+                    <div class="flow-arrow">↓</div>
+
+                    <div class="method-step">
+                        <div class="step-number">3</div>
+                        <h3>实地部署</h3>
+                        <div class="deployment-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="18">0</div>
+                                <div class="stat-label">个 Slack 频道</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="500">0</div>
+                                <div class="stat-label">+ 研究人员</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="3">0</div>
+                                <div class="stat-label">个月</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Research Scale -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2>为什么这项研究很扎实？</h2>
+
+                <div class="strength-cards" data-animation-delay="0">
+                    <div class="strength-card" data-animation-delay="0">
+                        <div class="strength-icon">🌍</div>
+                        <h3>大规模真实环境</h3>
+                        <p><strong>500+</strong> 用户，<strong>3个月</strong>，在 HCI 研究中非常罕见</p>
+                    </div>
+
+                    <div class="strength-card" data-animation-delay="200">
+                        <div class="strength-icon">🔬</div>
+                        <h3>混合方法研究</h3>
+                        <p><strong>定性</strong>（访谈、主题分析）+ <strong>定量</strong>（日志、问卷、评估任务）</p>
+                    </div>
+
+                    <div class="strength-card" data-animation-delay="400">
+                        <div class="strength-icon">✅</div>
+                        <h3>生态效度高</h3>
+                        <p>使用<strong>真实的研究团队</strong>群组，而非招募的临时受试者</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Social-RAG Workflow -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2>Social-RAG 工作流程（4步）</h2>
+
+                <div class="workflow-container" data-animation-delay="0">
+                    <div class="workflow-step" data-step="1">
+                        <div class="step-circle">1</div>
+                        <h3>Index 索引</h3>
+                        <p>收集群聊历史，提取"Social Facts"</p>
+                        <div class="example-text">例：谁分享了什么，谁点了赞</div>
+                    </div>
+
+                    <div class="workflow-arrow">→</div>
+
+                    <div class="workflow-step" data-step="2">
+                        <div class="step-circle">2</div>
+                        <h3>Retrieve 检索</h3>
+                        <p>检索相关的社交信号（Social Signals）</p>
+                        <div class="example-text">例："这篇论文引用了群友A上周分享的文章"</div>
+                    </div>
+
+                    <div class="workflow-arrow">→</div>
+
+                    <div class="workflow-step" data-step="3">
+                        <div class="step-circle">3</div>
+                        <h3>Generate 生成</h3>
+                        <p>利用 LLM 生成带有<strong>社交解释</strong>的推荐语</p>
+                        <div class="example-text">例："@张三，这篇论文和你上周分享的那篇很像"</div>
+                    </div>
+
+                    <div class="workflow-arrow">→</div>
+
+                    <div class="workflow-step" data-step="4">
+                        <div class="step-circle">4</div>
+                        <h3>Feedback 反馈</h3>
+                        <p>用户的点赞/回复成为新的历史数据</p>
+                        <div class="example-text">闭环优化 🔄</div>
+                    </div>
+                </div>
+
+                <canvas id="workflowCanvas" width="800" height="200"></canvas>
+            </div>
+        </section>
+
+        <!-- Slide 11: Social Signals -->
+        <section class="slide" data-slide="11">
+            <div class="slide-content">
+                <h2>三类社交信号</h2>
+
+                <div class="signals-grid" data-animation-delay="0">
+                    <div class="signal-card" data-animation-delay="0">
+                        <div class="signal-icon">🔗</div>
+                        <div class="signal-number">1</div>
+                        <h3>历史内容联系</h3>
+                        <p class="signal-desc">Content Connections</p>
+                        <div class="signal-example">
+                            "这篇论文<strong>引用了</strong>群里上周分享的论文 B"
+                        </div>
+                    </div>
+
+                    <div class="signal-card" data-animation-delay="200">
+                        <div class="signal-icon">📌</div>
+                        <div class="signal-number">2</div>
+                        <h3>元数据联系</h3>
+                        <p class="signal-desc">Metadata Connections</p>
+                        <div class="signal-example">
+                            "论文作者 X <strong>之前在群里被提到过</strong>"
+                        </div>
+                    </div>
+
+                    <div class="signal-card" data-animation-delay="400">
+                        <div class="signal-icon">👤</div>
+                        <div class="signal-number">3</div>
+                        <h3>群成员联系</h3>
+                        <p class="signal-desc">Member Connections</p>
+                        <div class="signal-example">
+                            "Alice <strong>之前点赞过</strong>类似的论文"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-highlight" data-animation-delay="600">
+                    <h4>💡 技术亮点</h4>
+                    <p>结合<strong>向量检索</strong>（语义相似度）和<strong>启发式规则</strong>（硬性关系，如作者相同）</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: PaperPing System -->
+        <section class="slide" data-slide="12">
+            <div class="slide-content">
+                <h2>PaperPing 系统</h2>
+
+                <div class="system-overview" data-animation-delay="0">
+                    <div class="system-col">
+                        <h3>核心功能</h3>
+                        <ul class="feature-list">
+                            <li><span class="check">✓</span> 自动推荐学术论文</li>
+                            <li><span class="check">✓</span> 生成带社交上下文的解释</li>
+                            <li><span class="check">✓</span> @提及可能感兴趣的成员</li>
+                            <li><span class="check">✓</span> 链接到之前的讨论</li>
+                        </ul>
+                    </div>
+
+                    <div class="system-col">
+                        <h3>技术栈</h3>
+                        <ul class="tech-list">
+                            <li><span class="tech-icon">⚡</span> Slack App API</li>
+                            <li><span class="tech-icon">🤖</span> GPT-4-turbo (生成)</li>
+                            <li><span class="tech-icon">📄</span> SPECTER (论文向量化)</li>
+                            <li><span class="tech-icon">🔍</span> Semantic Scholar API</li>
+                            <li><span class="tech-icon">💾</span> PostgreSQL + Node.js</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="design-principle" data-animation-delay="300">
+                    <div class="principle-icon">🤖</div>
+                    <div class="principle-text">
+                        <h4>设计原则</h4>
+                        <p>PaperPing 像一个<strong>"受邀的机器人客人"</strong>，有礼貌地融入群组，而不是主导对话</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Prompt Chain -->
+        <section class="slide" data-slide="13">
+            <div class="slide-content">
+                <h2>Prompt Chain 策略</h2>
+
+                <div class="prompt-chain" data-animation-delay="0">
+                    <div class="prompt-step">
+                        <div class="prompt-label">Prompt 1</div>
+                        <p>总结论文内容</p>
+                    </div>
+                    <div class="chain-arrow">↓</div>
+                    <div class="prompt-step">
+                        <div class="prompt-label">Prompt 2</div>
+                        <p>解释新论文与旧论文的关系</p>
+                    </div>
+                    <div class="chain-arrow">↓</div>
+                    <div class="prompt-step">
+                        <div class="prompt-label">Prompt 3</div>
+                        <p>解释新论文与特定用户的关系</p>
+                    </div>
+                    <div class="chain-arrow">↓</div>
+                    <div class="prompt-step">
+                        <div class="prompt-label">Prompt 4</div>
+                        <p><strong>综合</strong>信息，生成友好的社交文案</p>
+                    </div>
+                </div>
+
+                <div class="why-chain" data-animation-delay="400">
+                    <h3>为什么使用链式 Prompt？</h3>
+                    <div class="reasons">
+                        <div class="reason-item">
+                            <span class="reason-icon">🎯</span>
+                            <p>防止 LLM 产生<strong>幻觉</strong>（Hallucination）</p>
+                        </div>
+                        <div class="reason-item">
+                            <span class="reason-icon">🧩</span>
+                            <p>确保<strong>逻辑清晰</strong>，避免信息混乱</p>
+                        </div>
+                        <div class="reason-item">
+                            <span class="reason-icon">⚙️</span>
+                            <p>精细控制<strong>语气、格式和长度</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Results - RQ1 -->
+        <section class="slide" data-slide="14">
+            <div class="slide-content">
+                <h2>研究结果：RQ1 隐式反馈的有效性</h2>
+
+                <div class="results-stats" data-animation-delay="0">
+                    <div class="stat-card big">
+                        <div class="stat-value" data-count="75.7">0</div>
+                        <div class="stat-unit">%</div>
+                        <div class="stat-label">的推荐与群组偏好相关</div>
+                    </div>
+
+                    <div class="stat-card big">
+                        <div class="stat-value" data-count="88">0</div>
+                        <div class="stat-unit">%</div>
+                        <div class="stat-label">用户认为几乎不需要额外努力</div>
+                    </div>
+                </div>
+
+                <div class="interpretation" data-animation-delay="300">
+                    <h3>📊 解读</h3>
+                    <ul>
+                        <li>仅通过分析<strong>点赞和分享链接</strong>，AI 就能构建精准的"群体画像"</li>
+                        <li>用户不需要为 AI 而额外工作，只是在做<strong>日常社交行为</strong></li>
+                        <li>解决了 CSCW 中的"<strong>激励问题</strong>"——AI 顺便学习了</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: Results - RQ2 -->
+        <section class="slide" data-slide="15">
+            <div class="slide-content">
+                <h2>研究结果：RQ2 社交解释的价值</h2>
+
+                <div class="chart-container" data-animation-delay="0">
+                    <canvas id="explanationChart"></canvas>
+                </div>
+
+                <div class="user-quote" data-animation-delay="300">
+                    <div class="quote-icon">"</div>
+                    <p class="quote-text">我只需要看一眼它提到了谁，就知道这篇论文值不值得读。</p>
+                    <div class="quote-author">— 参与者反馈</div>
+                </div>
+
+                <div class="insight-box" data-animation-delay="500">
+                    <h4>💡 深度洞察：社交导航（Social Navigation）</h4>
+                    <p>在信息过载时代，我们筛选信息的依据往往不是"<strong>内容本身</strong>"，而是"<strong>谁在关注内容</strong>"</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 16: Results - RQ3 -->
+        <section class="slide" data-slide="16">
+            <div class="slide-content">
+                <h2>研究结果：RQ3 对社交实践的影响</h2>
+
+                <div class="metaphor-box" data-animation-delay="0">
+                    <h3>🤖 "受邀的机器人客人"</h3>
+                    <p>它不是主人，也不是仆人，而是一个<strong>有礼貌的客人</strong></p>
+                </div>
+
+                <div class="usage-patterns" data-animation-delay="200">
+                    <h3>四种使用模式</h3>
+                    <div class="patterns-grid">
+                        <div class="pattern-card positive">
+                            <h4>✅ 活跃群</h4>
+                            <p>AI 激发了更多人类讨论</p>
+                            <span class="pattern-label">Human-in-the-loop</span>
+                        </div>
+                        <div class="pattern-card positive">
+                            <h4>✅ 替代群</h4>
+                            <p>AI 成为主要内容来源</p>
+                            <span class="pattern-label">任务卸载</span>
+                        </div>
+                        <div class="pattern-card neutral">
+                            <h4>⚠️ 被动群</h4>
+                            <p>成员只查看，不参与讨论</p>
+                            <span class="pattern-label">Feed 模式</span>
+                        </div>
+                        <div class="pattern-card negative">
+                            <h4>❌ 失败案例</h4>
+                            <p>在"死群"里AI反而引起反感</p>
+                            <span class="pattern-label">刷屏问题</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-finding" data-animation-delay="500">
+                    <h4>🔑 关键发现</h4>
+                    <p><strong>AI 只能放大（Amplify）现有的社交动力，而不能无中生有</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 17: Results - RQ4 -->
+        <section class="slide" data-slide="17">
+            <div class="slide-content">
+                <h2>研究结果：RQ4 促进共同基础</h2>
+
+                <div class="quote-card" data-animation-delay="0">
+                    <div class="quote-mark">"</div>
+                    <p>推荐和社交信号让我意识到，原来我的群友对这个领域也感兴趣。</p>
+                    <div class="quote-source">— 参与者 P3</div>
+                </div>
+
+                <div class="common-ground-viz" data-animation-delay="200">
+                    <div class="cg-item">
+                        <div class="cg-icon">👁️</div>
+                        <h4>社会透明度</h4>
+                        <p>Social Translucence</p>
+                    </div>
+                    <div class="cg-arrow">→</div>
+                    <div class="cg-item">
+                        <div class="cg-icon">🤝</div>
+                        <h4>互知</h4>
+                        <p>Mutual Knowledge</p>
+                    </div>
+                    <div class="cg-arrow">→</div>
+                    <div class="cg-item">
+                        <div class="cg-icon">⚡</div>
+                        <h4>高效协作</h4>
+                        <p>Effective Collaboration</p>
+                    </div>
+                </div>
+
+                <div class="mechanism-box" data-animation-delay="400">
+                    <h4>机制</h4>
+                    <p>通过公开展示个性化推荐（如"@Alice，这篇你可能喜欢"），其他成员（Bob, Charlie）也间接了解了 Alice 的兴趣</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 18: Discussion - Four Levels -->
+        <section class="slide" data-slide="18">
+            <div class="slide-content">
+                <h2>理论贡献：社交接地的四个层级</h2>
+
+                <div class="levels-pyramid" data-animation-delay="0">
+                    <div class="pyramid-level level-3">
+                        <div class="level-number">Level 3</div>
+                        <div class="level-content">
+                            <h4>Individual-level Grounding</h4>
+                            <p>个人级接地：在群组中针对特定个人定制</p>
+                            <span class="level-tag highest">最高级，但涉及隐私</span>
+                        </div>
+                    </div>
+
+                    <div class="pyramid-level level-2">
+                        <div class="level-number">Level 2</div>
+                        <div class="level-content">
+                            <h4>Group-level Grounding</h4>
+                            <p>群组级接地：学习特定群组的话题偏好、语气</p>
+                            <span class="level-tag">PaperPing 的主要层面 ⭐</span>
+                        </div>
+                    </div>
+
+                    <div class="pyramid-level level-1">
+                        <div class="level-number">Level 1</div>
+                        <div class="level-content">
+                            <h4>Category-level Grounding</h4>
+                            <p>类别级接地：根据群组类型调整</p>
+                            <span class="level-tag">粗颗粒度</span>
+                        </div>
+                    </div>
+
+                    <div class="pyramid-level level-0">
+                        <div class="level-number">Level 0</div>
+                        <div class="level-content">
+                            <h4>No Grounding</h4>
+                            <p>无接地：通用模板，对所有群组说一样的话</p>
+                            <span class="level-tag">成本低，体验差</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 19: Design Insights & Limitations -->
+        <section class="slide" data-slide="19">
+            <div class="slide-content">
+                <h2>设计启示与局限性</h2>
+
+                <div class="two-col-layout" data-animation-delay="0">
+                    <div class="col">
+                        <h3>✨ 三个关键设计原则</h3>
+                        <div class="principle-list">
+                            <div class="principle-item">
+                                <div class="principle-num">1</div>
+                                <div class="principle-content">
+                                    <h4>Implicit Feedback</h4>
+                                    <p>利用点赞/聊天比填表更有效</p>
+                                </div>
+                            </div>
+                            <div class="principle-item">
+                                <div class="principle-num">2</div>
+                                <div class="principle-content">
+                                    <h4>Transparency</h4>
+                                    <p>AI 需要解释"为什么推荐"</p>
+                                </div>
+                            </div>
+                            <div class="principle-item">
+                                <div class="principle-num">3</div>
+                                <div class="principle-content">
+                                    <h4>Balance</h4>
+                                    <p>平衡群组与个人兴趣</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <h3>⚠️ 局限性</h3>
+                        <div class="limitation-list">
+                            <div class="limitation-item">
+                                <span class="limit-icon">🔒</span>
+                                <p><strong>隐私边界：</strong>AI 在"监视"群聊</p>
+                            </div>
+                            <div class="limitation-item">
+                                <span class="limit-icon">🌀</span>
+                                <p><strong>幻觉风险：</strong>LLM 过度解读信号</p>
+                            </div>
+                            <div class="limitation-item">
+                                <span class="limit-icon">❄️</span>
+                                <p><strong>冷启动：</strong>新群组无能为力</p>
+                            </div>
+                            <div class="limitation-item">
+                                <span class="limit-icon">🔄</span>
+                                <p><strong>兴趣转移：</strong>难以及时反映变化</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 20: Conclusion & Future -->
+        <section class="slide" data-slide="20">
+            <div class="slide-content">
+                <h2>总结与未来展望</h2>
+
+                <div class="takeaways" data-animation-delay="0">
+                    <h3>🎯 关键要点（Takeaways）</h3>
+                    <div class="takeaway-cards">
+                        <div class="takeaway-card">
+                            <div class="takeaway-num">1</div>
+                            <h4>Context is King, Social Context is Emperor</h4>
+                            <p>必须理解人与人之间的关系网络</p>
+                        </div>
+                        <div class="takeaway-card">
+                            <div class="takeaway-num">2</div>
+                            <h4>Implicit > Explicit</h4>
+                            <p>利用数字痕迹进行隐式学习</p>
+                        </div>
+                        <div class="takeaway-card">
+                            <div class="takeaway-num">3</div>
+                            <h4>RAG 的新边疆</h4>
+                            <p>社交图谱能赋予 LLM "情商"</p>
+                        </div>
+                        <div class="takeaway-card">
+                            <div class="takeaway-num">4</div>
+                            <h4>AI 作为社会行动者</h4>
+                            <p>需要自我介绍、观察、建立信任</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="future-vision" data-animation-delay="400">
+                    <div class="vision-icon">🚀</div>
+                    <h3>未来展望</h3>
+                    <p class="vision-text">
+                        AI 不再是冷冰冰的问答机器，<br>
+                        而是一个熟悉团队历史、懂得团队"梗"的<br>
+                        <strong>社交润滑剂</strong>
+                    </p>
+                </div>
+
+                <div class="thank-you" data-animation-delay="600">
+                    <h2>谢谢！</h2>
+                    <p class="qa">Q & A</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script src="visualizations.js"></script>
+</body>
+
+</html>

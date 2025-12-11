@@ -1,0 +1,256 @@
+\documentclass[aspectratio=169]{beamer}
+
+% Packages
+\usepackage{ctex} % For Chinese support
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% Theme
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Metadata
+\title[Social-RAG]{Social-RAG: Retrieving from Group Interactions to Socially Ground AI Generation}
+\subtitle{Social-RAG：从群组互动中检索以实现 AI 生成的社交接地}
+\author[Group Name]{汇报人：[你的名字/小组名]}
+\institute[CHI 2025]{CHI 2025}
+\date{\today}
+
+\begin{document}
+
+% Slide 1: Title Slide
+\begin{frame}
+    \titlepage
+    \begin{center}
+        \small Authors: Ruotong Wang, Xinyi Zhou, et al. (University of Washington \& Allen Institute for AI)
+    \end{center}
+\end{frame}
+
+% Slide 2: The Big Picture
+\begin{frame}{宏观背景 (The Big Picture)}
+    \begin{itemize}
+        \item \textbf{一句话总结 (Summary)}: 
+        \begin{itemize}
+            \item 本文提出 \textbf{Social-RAG} 工作流，通过检索群组历史互动（聊天记录、点赞），让 AI 智能体能够“读懂空气”，生成符合群组兴趣和社交规范的内容。
+        \end{itemize}
+        \vspace{0.5cm}
+        \item \textbf{核心价值 (Value)}:
+        \begin{itemize}
+            \item 解决 AI 在群组协作中“不知所措”或“令人烦躁”的问题。
+            \item 探索 \textbf{Human-AI Collaboration} 中 AI 如何融入人类社交空间。
+        \end{itemize}
+        \vspace{0.5cm}
+        \item \textbf{应用场景 (Application)}:
+        \begin{itemize}
+            \item 学术群组的论文推荐机器人 \textbf{PaperPing}。
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 3: Research Context & Problem
+\begin{frame}{研究背景与问题 (Context \& Problem)}
+    \begin{block}{现有问题 (The Gap)}
+        \begin{itemize}
+            \item \textbf{社交感知缺失}: 现有 AI 使用通用模板，不懂群组特定偏好 (Social Norms)。
+            \item \textbf{“冷启动”困难}: 传统个性化需要用户手动填表 (Explicit Feedback)，干扰大。
+            \item \textbf{RAG 的局限}: 传统 RAG 检索事实知识 (Facts)，忽略了 \textbf{Social Knowledge} (社交知识/群组动态)。
+        \end{itemize}
+    \end{block}
+    
+    \begin{alertblock}{核心挑战}
+        如何在不打扰用户的前提下，让 AI 自动学习群组的偏好和规范？
+    \end{alertblock}
+\end{frame}
+
+% Slide 4: Research Questions
+\begin{frame}{研究问题 (Research Questions)}
+    \begin{itemize}
+        \item \textbf{RQ1 (Feedback)}: 
+        \begin{itemize}
+            \item 这种隐式反馈机制（点赞、历史记录）收集群组兴趣的效果如何？
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{RQ2 (Explanation)}: 
+        \begin{itemize}
+            \item 基于社交信号的 AI 解释 (Social Explanations) 能否有效传达相关性？
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{RQ3 (Practices)}: 
+        \begin{itemize}
+            \item AI 是否会破坏群组原有的社交习惯？
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{RQ4 (Common Ground)}: 
+        \begin{itemize}
+            \item AI 能否促进群组的共同基础 (Common Ground)？
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 5: Methodology
+\begin{frame}{研究方法论 (Methodology)}
+    \textbf{User-Centered Design (UCD) 流程}:
+    \vspace{0.5cm}
+    \begin{enumerate}
+        \item \textbf{Formative Studies (形成性研究)}
+        \begin{itemize}
+            \item 采访 13 位研究员 + 问卷调查 26 人。
+            \item \textbf{发现}: 学者喜欢分享论文但懒得写推荐语；偏好中立、简短且带有社交上下文的推荐。
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{System Design (系统设计)}
+        \begin{itemize}
+            \item 开发 Social-RAG 工作流和 PaperPing 系统。
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{Field Deployment (实地部署)}
+        \begin{itemize}
+            \item \textbf{规模}: 18 个 Slack 频道，500+ 研究人员。
+            \item \textbf{时长}: 3 个月。
+            \item \textbf{数据}: 日志分析 + 退出访谈 + 离线评估任务。
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+% Slide 6: System Design - Social-RAG Workflow
+\begin{frame}{系统设计: Social-RAG 工作流}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{四大步骤:}
+        \begin{enumerate}
+            \item \textbf{Index (索引)}: 
+            \newline 收集群聊历史，提取 Social Facts。
+            \item \textbf{Retrieve (检索)}: 
+            \newline 检索相关的社交信号 (Social Signals)。
+            \begin{itemize}
+                \item \textit{Ex: "引用了A上周分享的文章"}
+            \end{itemize}
+            \item \textbf{Generate (生成)}: 
+            \newline 利用 LLM 生成带有社交解释的推荐语。
+            \item \textbf{Feedback (反馈)}: 
+            \newline 用户的点赞/回复成为新数据，闭环优化。
+        \end{enumerate}
+        
+        \column{0.5\textwidth}
+        \begin{center}
+            % Placeholder for Workflow Diagram
+            \fbox{\parbox{0.8\textwidth}{\centering \vspace{2cm} [此处插入工作流图表 Figure 1] \vspace{2cm}}}
+        \end{center}
+    \end{columns}
+\end{frame}
+
+% Slide 7: System Design - PaperPing Interface
+\begin{frame}{系统设计: PaperPing 界面}
+    \begin{columns}
+        \column{0.6\textwidth}
+        \begin{itemize}
+            \item \textbf{特点}:
+            \begin{itemize}
+                \item 自动 @ 感兴趣的人。
+                \item 引用之前的讨论 (Link to context)。
+                \item 解释推荐理由 (Social Explanation)。
+            \end{itemize}
+            \vspace{0.5cm}
+            \item \textbf{示例}:
+            \begin{quote}
+                ``@Tom, 这篇论文你可能感兴趣，因为它引用了你上周分享的那篇...''
+            \end{quote}
+        \end{itemize}
+        
+        \column{0.4\textwidth}
+        \begin{center}
+            % Placeholder for Interface Screenshot
+            \fbox{\parbox{0.9\textwidth}{\centering \vspace{3cm} [此处插入 PaperPing 界面截图 Figure 2/3] \vspace{3cm}}}
+        \end{center}
+    \end{columns}
+\end{frame}
+
+% Slide 8: Results - Quantitative
+\begin{frame}{研究结果: 定量分析 (Quantitative)}
+    \begin{itemize}
+        \item \textbf{高相关性}: 
+        \begin{itemize}
+            \item \textbf{75.7\%} 的推荐被认为与群组偏好相关。
+        \end{itemize}
+        \vspace{0.5cm}
+        \item \textbf{解释的有效性 (Offline Evaluation)}: 
+        \begin{itemize}
+            \item 带有 \textbf{Social Signals} 的解释显著优于普通的 TLDR（仅摘要）。
+            \item 用户更能理解“为什么这篇论文与我有关”。
+        \end{itemize}
+        \vspace{0.5cm}
+        \item \textbf{低负担}: 
+        \begin{itemize}
+            \item \textbf{88\%} 的用户认为使用该系统几乎不需要额外努力。
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 9: Results - Qualitative
+\begin{frame}{研究结果: 定性发现 (Qualitative)}
+    \begin{itemize}
+        \item \textbf{"Invited Robot Guest" (受邀的机器人客人)}:
+        \begin{itemize}
+            \item 用户感觉 AI 像一个有礼貌的客人，没有破坏原有对话。
+        \end{itemize}
+        \vspace{0.5cm}
+        \item \textbf{Fostering Common Ground (促进共同基础)}:
+        \begin{itemize}
+            \item 帮助群成员发现彼此的兴趣（“原来你也关注这个方向”）。
+        \end{itemize}
+        \vspace{0.5cm}
+        \item \textbf{局限性}:
+        \begin{itemize}
+            \item 在非常不活跃的群组（死群）里，AI 也很难救活。
+            \item 偶尔会出现过度解读 (Hallucination of social intent)。
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% Slide 10: Discussion & Contributions
+\begin{frame}{讨论与贡献 (Discussion \& Contributions)}
+    \begin{enumerate}
+        \item \textbf{理论贡献}: 
+        \begin{itemize}
+            \item 提出了 \textbf{Social Grounding} 的分层模型 (Category-level $\rightarrow$ Group-level $\rightarrow$ Individual-level)。
+        \end{itemize}
+        \vspace{0.5cm}
+        \item \textbf{设计启示}:
+        \begin{itemize}
+            \item \textbf{Implicit Feedback}: 利用自然互动比强制填表更有效。
+            \item \textbf{Transparency}: AI 需要解释“为什么推荐”，引用社交历史建立信任。
+            \item \textbf{Tension}: 平衡“群组兴趣”和“个人兴趣”是难点。
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+% Slide 11: Takeaways
+\begin{frame}{总结与启示 (Takeaways)}
+    \begin{block}{Takeaway 1}
+        未来的 AI 助手不应只懂知识，更要懂“关系”和“历史”。
+    \end{block}
+    
+    \begin{block}{Takeaway 2}
+        \textbf{Social-RAG} 提供了一个很好的范式，将群聊数据转化为 AI 的长期记忆和社交直觉。
+    \end{block}
+    
+    \vspace{0.5cm}
+    \textbf{对我们的启发}:
+    \begin{itemize}
+        \item (可根据小组方向补充，例如：利用历史数据的方式、群组协作中的社交信号提取等)
+    \end{itemize}
+\end{frame}
+
+% Slide 12: Q&A
+\begin{frame}
+    \begin{center}
+        \Huge \textbf{Thank You!}
+        
+        \vspace{1cm}
+        \Large Q \& A
+    \end{center}
+\end{frame}
+
+\end{document}

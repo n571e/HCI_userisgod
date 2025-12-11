@@ -1,0 +1,45 @@
+<!-- Slide 7: Step 1 - Building Social Knowledge Base -->
+<section class="slide" data-slide="7">
+    <div class="slide-number">7/20</div>
+    <div class="slide-content">
+        <h2 style="font-size: 2.4rem;">📚 Step 1: 构建社交知识库</h2>
+
+        <div class="process-flow" style="flex-direction: column; gap: 0.8rem; font-size: 1rem;">
+            <div class="process-step" data-animation-delay="0" style="width: 100%; padding: 0.8rem;">
+                <h4 class="process-title" style="margin-bottom: 0.5rem;">💬 数据源</h4>
+                <div class="metric-row" style="gap: 1rem;">
+                    <div class="metric-box" style="padding: 0.8rem;">
+                        <div class="icon-medium" style="font-size: 1.5rem;">📝</div>
+                        <p style="font-size: 1rem; margin: 0.3rem 0 0;"><strong>消息内容</strong><br>文本、链接、附件</p>
+                    </div>
+                    <div class="metric-box" style="padding: 0.8rem;">
+                        <div class="icon-medium" style="font-size: 1.5rem;">👍</div>
+                        <p style="font-size: 1rem; margin: 0.3rem 0 0;"><strong>互动数据</strong><br>表情、回复、@提及</p>
+                    </div>
+                    <div class="metric-box" style="padding: 0.8rem;">
+                        <div class="icon-medium" style="font-size: 1.5rem;">⏰</div>
+                        <p style="font-size: 1rem; margin: 0.3rem 0 0;"><strong>元数据</strong><br>时间戳、作者ID</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-arrow" style="font-size: 1.5rem; margin: 0;">↓</div>
+
+            <div class="process-step" data-animation-delay="200" style="width: 100%; padding: 0.8rem;">
+                <h4 class="process-title" style="font-size: 1.2rem; margin-bottom: 0.3rem;">🔗 外部知识增强</h4>
+                <p class="process-desc" style="font-size: 1rem; margin: 0;">调用外部API（如Semantic Scholar）获取论文元数据：标题、作者、摘要、引用关系、发表会议等</p>
+            </div>
+
+            <div class="process-arrow" style="font-size: 1.5rem; margin: 0;">↓</div>
+
+            <div class="process-step" data-animation-delay="400" style="width: 100%; padding: 0.8rem;">
+                <h4 class="process-title" style="font-size: 1.2rem; margin-bottom: 0.3rem;">🧲 向量化存储</h4>
+                <p class="process-desc" style="font-size: 1rem; margin: 0;">使用Embedding模型将文本转为向量，存入向量数据库，支持后续的语义相似度检索</p>
+            </div>
+        </div>
+
+        <div class="highlight-box-enhanced" data-animation-delay="600" style="margin-top: 1.2rem; padding: 1rem 1.2rem;">
+            <p style="font-size: 1.1rem; margin: 0;"><strong>关键优势:</strong> 保留社交上下文（谁发的、谁点赞了、谁回复了），而不仅仅是内容本身。</p>
+        </div>
+    </div>
+</section>

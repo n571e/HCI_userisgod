@@ -1,0 +1,471 @@
+\documentclass[UTF8,aspectratio=169]{ctexbeamer}
+
+% 使用主题
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% 包
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+% 自定义颜色
+\definecolor{myblue}{RGB}{0,102,204}
+\definecolor{mygreen}{RGB}{0,153,76}
+
+% 设置
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+% 标题信息
+\title{Social-RAG: 从群组互动中检索以实现 AI 生成的社交接地}
+\subtitle{Retrieving from Group Interactions to Socially Ground AI Generation}
+\author{汇报人：[您的姓名]}
+\institute{课程：人机交互}
+\date{\today}
+
+\begin{document}
+
+% ==================== 封面 ====================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% ==================== 目录 ====================
+\begin{frame}{目录}
+\tableofcontents
+\end{frame}
+
+% ==================== 第一部分：宏观背景 ====================
+\section{宏观背景}
+
+\begin{frame}{一句话总结}
+\begin{block}{核心概念}
+本文提出了一种新的工作流 \textbf{Social-RAG}，通过检索群组的历史互动（如聊天记录、点赞），让 AI 智能体（Agent）能够\textcolor{myblue}{"读懂空气"}，生成符合群组兴趣和社交规范的内容。
+\end{block}
+
+\vspace{0.5cm}
+
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{发表会议：} CHI 2025 \\
+\textbf{作者：} Ruotong Wang 等 \\
+\textbf{机构：} 华盛顿大学 \& 艾伦人工智能研究所
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{应用场景：} \\
+学术群组的论文推荐机器人 \textbf{PaperPing}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{为什么重要？}
+\begin{itemize}
+\item \textbf{核心价值：} 解决 AI 在群组协作中常常显得"不知所措"或"令人烦躁"的问题
+\item \textbf{研究主题：} 探索 \textcolor{myblue}{Human-AI Collaboration}（人机协作）中 AI 如何融入人类社交空间
+\item \textbf{时代背景：} AI 从"工具"演变为"智能体"，需要更高的社交感知能力
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{alertblock}{关键问题}
+当 AI 进入多用户社交空间时，如何让它理解群体动力学（Group Dynamics）和社会规范（Social Norms）？
+\end{alertblock}
+\end{frame}
+
+% ==================== 第二部分：研究背景与问题 ====================
+\section{研究背景与问题}
+
+\begin{frame}{现有问题：社会技术鸿沟}
+\begin{block}{三大困境}
+\begin{enumerate}
+\item \textbf{社交感知缺失：} 现有 AI 使用通用模板，不懂群组的特定偏好
+\item \textbf{"冷启动"困难：} 需要用户手动填表或投票，麻烦且干扰群组
+\item \textbf{RAG 的局限：} 传统 RAG 检索事实知识，忽略了社交知识（Social Knowledge）
+\end{enumerate}
+\end{block}
+
+\vspace{0.3cm}
+
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{传统 RAG：} \\
+检索 → 事实（维基百科）
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Social-RAG：} \\
+检索 → 社交事实（群组偏好、互动历史）
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{核心挑战}
+\begin{center}
+\Large
+\textcolor{myblue}{如何在不打扰用户的前提下，让 AI 自动学习群组的偏好和规范？}
+\end{center}
+
+\vspace{1cm}
+
+\begin{itemize}
+\item 显式反馈（填表）负担重，破坏社交体验
+\item 隐式反馈（点赞、聊天记录）如何有效利用？
+\item AI 如何避免在群组中"刷屏"或"尴尬"？
+\end{itemize}
+\end{frame}
+
+% ==================== 第三部分：研究问题 ====================
+\section{研究问题}
+
+\begin{frame}{四个研究问题（RQ）}
+\begin{itemize}
+\item \textbf{RQ1 (Feedback):} 隐式反馈机制（点赞、历史记录）收集群组兴趣的效果如何？
+\vspace{0.3cm}
+\item \textbf{RQ2 (Explanation):} 基于社交信号的 AI 解释能否有效传达相关性？
+\vspace{0.3cm}
+\item \textbf{RQ3 (Practices):} AI 是否会破坏群组原有的社交习惯？
+\vspace{0.3cm}
+\item \textbf{RQ4 (Common Ground):} AI 能否促进群组的共同基础（Common Ground）？
+\end{itemize}
+\end{frame}
+
+% ==================== 第四部分：研究方法论 ====================
+\section{研究方法论}
+
+\begin{frame}{用户中心设计（UCD）流程}
+\begin{enumerate}
+\item \textbf{形成性研究（Formative Studies）:}
+  \begin{itemize}
+  \item 采访 13 位研究员 + 问卷调查 26 人
+  \item 发现：学者喜欢分享论文，但写推荐语很累；更喜欢\textcolor{myblue}{中立、简短}的推荐语
+  \end{itemize}
+  
+\vspace{0.3cm}
+
+\item \textbf{系统设计（System Design）:}
+  \begin{itemize}
+  \item 开发 Social-RAG 工作流和 PaperPing 系统
+  \end{itemize}
+  
+\vspace{0.3cm}
+
+\item \textbf{实地部署（Field Deployment）:}
+  \begin{itemize}
+  \item \textcolor{mygreen}{18 个 Slack 频道}，覆盖 \textcolor{mygreen}{500+ 研究人员}
+  \item 时长：\textcolor{mygreen}{3个月}
+  \item 数据：日志分析 + 退出访谈 + 离线评估
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{研究规模与特点}
+\begin{block}{为什么这项研究很扎实？}
+\begin{itemize}
+\item \textbf{大规模真实环境部署：} 500+用户，3个月，在 HCI 研究中非常罕见
+\item \textbf{混合方法研究：} 定性（访谈、主题分析） + 定量（日志、问卷、评估任务）
+\item \textbf{生态效度高：} 使用真实的研究团队群组，而非招募的临时受试者
+\end{itemize}
+\end{block}
+\end{frame}
+
+% ==================== 第五部分：系统设计 ====================
+\section{系统设计}
+
+\begin{frame}{Social-RAG 工作流（4步）}
+\begin{enumerate}
+\item \textbf{Index (索引)：} 收集群聊历史，提取"Social Facts"
+
+  例：谁分享了什么，谁点了赞
+
+\vspace{0.3cm}
+
+\item \textbf{Retrieve (检索)：} 检索相关的社交信号（Social Signals）
+
+  例："这篇论文引用了群友 A 上周分享的文章"
+
+\vspace{0.3cm}
+
+\item \textbf{Generate (生成)：} 利用 LLM 生成带有\textcolor{myblue}{社交解释}的推荐语
+
+  例："@张三，这篇论文和你上周分享的那篇很像"
+
+\vspace{0.3cm}
+
+\item \textbf{Feedback (反馈)：} 用户的点赞/回复会成为新的历史数据，闭环优化
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{三类社交信号}
+\begin{table}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{信号类型} & \textbf{示例} \\
+\midrule
+\textbf{1. 历史内容联系} & "这篇论文引用了群里上周分享的论文 B" \\
+\textbf{2. 元数据联系} & "论文作者 X 之前在群里被提到过" \\
+\textbf{3. 群成员联系} & "Alice 之前点赞过类似的论文" \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+
+\begin{alertblock}{技术亮点}
+结合\textbf{向量检索}（语义相似度）和\textbf{启发式规则}（硬性关系，如作者相同）
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{PaperPing 系统}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{核心功能：}
+\begin{itemize}
+\item 自动推荐学术论文
+\item 生成带社交上下文的解释
+\item @提及可能感兴趣的成员
+\item 链接到之前的讨论
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{技术栈：}
+\begin{itemize}
+\item Slack App API
+\item GPT-4-turbo (生成)
+\item SPECTER (论文向量化)
+\item Semantic Scholar API
+\item PostgreSQL + Node.js
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5cm}
+
+\begin{block}{设计原则}
+PaperPing 像一个\textcolor{myblue}{"受邀的机器人客人"}，有礼貌地融入群组，而不是主导对话
+\end{block}
+\end{frame}
+
+\begin{frame}{Prompt Chain 策略}
+\begin{itemize}
+\item \textbf{Prompt 1:} 总结论文内容
+\item \textbf{Prompt 2:} 解释新论文与旧论文的关系
+\item \textbf{Prompt 3:} 解释新论文与特定用户的关系
+\item \textbf{Prompt 4 (Synthesis):} 综合信息，生成友好的社交文案
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{exampleblock}{为什么使用链式 Prompt？}
+\begin{itemize}
+\item 防止 LLM 产生幻觉（Hallucination）
+\item 确保逻辑清晰，避免信息混乱
+\item 精细控制语气、格式和长度
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+% ==================== 第六部分：研究结果 ====================
+\section{研究结果}
+
+\begin{frame}{RQ1：隐式反馈的有效性}
+\begin{block}{定量结果}
+\begin{itemize}
+\item \textcolor{mygreen}{75.7\%} 的推荐被认为与群组偏好相关
+\item \textcolor{mygreen}{88\%} 的用户认为使用该系统几乎不需要额外努力
+\end{itemize}
+\end{block}
+
+\vspace{0.3cm}
+
+\textbf{解读：}
+\begin{itemize}
+\item 仅通过分析点赞和分享链接，AI 就能构建精准的"群体画像"
+\item 用户不需要为 AI 而额外工作，只是在做日常社交行为
+\end{itemize}
+\end{frame}
+
+\begin{frame}{RQ2：社交解释的价值}
+\begin{block}{离线评估结果}
+带有社交信号的解释，在"帮助理解与群组相关性"的得分上，显著高于纯摘要（P < 0.001）
+\end{block}
+
+\vspace{0.3cm}
+
+\textbf{用户心声：}
+\begin{quote}
+"我只需要看一眼它提到了谁，就知道这篇论文值不值得读。"
+\end{quote}
+
+\vspace{0.3cm}
+
+\begin{alertblock}{深度洞察}
+在信息过载时代，我们筛选信息的依据往往不是"内容本身"，而是\textcolor{myblue}{"谁在关注内容"}——这就是\textbf{社交导航（Social Navigation）}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{RQ3：对社交实践的影响}
+\begin{block}{定性发现}
+用户将 PaperPing 比作\textcolor{myblue}{"受邀的机器人客人"}——它不是主人，也不是仆人，而是一个有礼貌的客人
+\end{block}
+
+\vspace{0.3cm}
+
+\textbf{四种使用模式：}
+\begin{itemize}
+\item \textbf{活跃群：} AI 激发了更多人类讨论（Human-in-the-loop）
+\item \textbf{替代群：} AI 成为主要内容来源，人类"偷懒"了（任务卸载）
+\item \textbf{被动群：} 成员只是查看推荐，不参与讨论（Feed 模式）
+\item \textbf{失败案例：} 在"死群"里，AI 无法凭空创造社交，甚至可能因刷屏导致反感
+\end{itemize}
+
+\vspace{0.3cm}
+
+\begin{alertblock}{关键发现}
+\textbf{AI 只能放大（Amplify）现有的社交动力，而不能无中生有}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{RQ4：促进共同基础}
+\begin{block}{发现}
+PaperPing 帮助群成员发现了"意想不到的共同点"
+\end{block}
+
+\vspace{0.3cm}
+
+\textbf{案例：}
+\begin{quote}
+"推荐和社交信号让我意识到，原来我的群友对这个领域也感兴趣。"
+\end{quote}
+
+\vspace{0.3cm}
+
+\begin{itemize}
+\item 通过公开展示个性化推荐（如"@Alice，这篇你可能喜欢"），其他成员（Bob, Charlie）也间接了解了 Alice 的兴趣
+\item 这种\textcolor{myblue}{互知（Mutual Knowledge）}是高效协作的基石
+\item 增强了群组的\textbf{社会透明度（Social Translucence）}
+\end{itemize}
+\end{frame}
+
+% ==================== 第七部分：讨论与贡献 ====================
+\section{讨论与贡献}
+
+\begin{frame}{理论贡献：社交接地的四个层级}
+\begin{enumerate}
+\item \textbf{Level 0: No Grounding} \\
+  通用模板，对所有群组说一样的话（成本低，体验差）
+
+\vspace{0.2cm}
+
+\item \textbf{Level 1: Category-level Grounding} \\
+  根据群组类型调整（如"这是一个 NLP 群"）
+
+\vspace{0.2cm}
+
+\item \textbf{Level 2: Group-level Grounding} \\
+  学习特定群组的隐式话题偏好、语气、梗（PaperPing 的主要层面）
+
+\vspace{0.2cm}
+
+\item \textbf{Level 3: Individual-level Grounding} \\
+  在群组中针对特定个人进行定制化（最高级，但涉及隐私和权力动态）
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{设计启示}
+\begin{block}{三个关键设计原则}
+\begin{enumerate}
+\item \textbf{Implicit Feedback（隐式反馈）:} \\
+  利用现有的点赞/聊天记录比强制用户填表更有效
+
+\vspace{0.2cm}
+
+\item \textbf{Transparency（透明度）:} \\
+  AI 需要解释"为什么推荐给你"，引用社交历史是建立信任的好方法
+
+\vspace{0.2cm}
+
+\item \textbf{Tension（张力）:} \\
+  平衡"群组兴趣"和"个人兴趣"是一个难点
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{局限性}
+\begin{itemize}
+\item \textbf{隐私边界：} AI 在"监视"群聊，如何平衡效用和隐私？
+\item \textbf{幻觉风险：} LLM 可能会过度解读社交信号（点赞 ≠ 极度喜欢）
+\item \textbf{冷启动的死结：} 对于全新的群组，Social-RAG 依然无能为力
+\item \textbf{兴趣转移：} 难以及时反映群组兴趣的变化
+\end{itemize}
+\end{frame}
+
+% ==================== 第八部分：总结 ====================
+\section{总结与反思}
+
+\begin{frame}{关键要点（Takeaways）}
+\begin{enumerate}
+\item \textbf{Context is King, Social Context is Emperor} \\
+  对于群组 AI，必须理解人与人之间的关系网络
+
+\vspace{0.3cm}
+
+\item \textbf{Implicit > Explicit} \\
+  利用数字痕迹进行隐式学习，体验远优于显式询问
+
+\vspace{0.3cm}
+
+\item \textbf{RAG 的新边疆} \\
+  将社交图谱和互动日志作为 RAG 的检索源，能赋予 LLM "情商"
+
+\vspace{0.3cm}
+
+\item \textbf{AI 作为社会行动者} \\
+  设计 AI 进入群组的流程：自我介绍、观察、建立信任、懂得礼貌
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{未来展望}
+\begin{itemize}
+\item 未来的 AI 助手不应只懂知识，更要懂"关系"和"历史"
+\item Social-RAG 提供了一个很好的范式，将群聊数据转化为 AI 的长期记忆和社交直觉
+\item 可以应用于更多场景：
+  \begin{itemize}
+  \item Reddit 社区的虚假信息纠正机器人
+  \item 会议总结工具
+  \item 协作写作助手
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{center}
+\Large
+\textcolor{myblue}{AI 不再是冷冰冰的问答机器，\\
+而是一个熟悉团队历史、懂得团队"梗"的\textbf{社交润滑剂}}
+\end{center}
+\end{frame}
+
+% ==================== 致谢 ====================
+\begin{frame}
+\begin{center}
+{\Huge 谢谢！}
+
+\vspace{1cm}
+
+{\Large Q \& A}
+
+\vspace{1cm}
+
+\small
+参考文献：\\
+Ruotong Wang, Xinyi Zhou, Lin Qiu, Joseph Chee Chang, Jonathan Bragg, and Amy X. Zhang. 2025. \\
+Social-RAG: Retrieving from Group Interactions to Socially Ground AI Generation. \\
+In \textit{CHI Conference on Human Factors in Computing Systems (CHI '25)}.
+\end{center}
+\end{frame}
+
+\end{document}

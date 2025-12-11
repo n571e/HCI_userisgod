@@ -1,0 +1,51 @@
+<!-- Slide 8: Step 2 - Retrieving Social Signals -->
+<section class="slide" data-slide="8">
+    <div class="slide-number">8/20</div>
+    <div class="slide-content">
+        <h2>🔍 Step 2: 检索社交信号</h2>
+
+        <p class="large-text" style="text-align: center; margin-bottom: 2rem;">
+            当AI准备发言时，从知识库中检索<strong class="keyword">三类社交信号</strong>
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-card" data-animation-delay="0">
+                <div class="feature-icon">📄</div>
+                <h3 class="feature-title">1. 内容联系</h3>
+                <p class="feature-desc">
+                    新论文A是否引用了群里分享过的论文B？<br>
+                    或论文B引用了A？<br>
+                    <span class="badge">建立学术脉络</span>
+                </p>
+            </div>
+
+            <div class="feature-card" data-animation-delay="200">
+                <div class="feature-icon">🏷️</div>
+                <h3 class="feature-title">2. 元数据联系</h3>
+                <p class="feature-desc">
+                    论文作者X之前被提到过吗？<br>
+                    是否来自群组常讨论的会议（如CHI）？<br>
+                    <span class="badge">利用名人/品牌效应</span>
+                </p>
+            </div>
+
+            <div class="feature-card" data-animation-delay="400">
+                <div class="feature-icon">👤</div>
+                <h3 class="feature-title">3. 成员联系</h3>
+                <p class="feature-desc">
+                    群成员Alice点赞过类似论文吗？<br>
+                    可以@Alice激活讨论<br>
+                    <span class="badge">个性化推荐</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="data-viz-container" data-animation-delay="600" style="margin-top: 2rem;">
+            <h4 style="color: var(--primary-blue); margin-bottom: 1rem;">🔧 技术实现</h4>
+            <p><strong>混合方法:</strong> 语义相似度检索（Embeddings） + 启发式规则（Heuristics）</p>
+            <p style="margin-top: 1rem; color: var(--gray-600);">
+                例如："作者相同"是硬性规则，无法通过纯语义检索捕捉
+            </p>
+        </div>
+    </div>
+</section>
